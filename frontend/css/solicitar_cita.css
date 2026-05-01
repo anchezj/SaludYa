@@ -258,30 +258,3 @@
 .btn-seleccionar:hover {
     background-color: var(--info-hover);
 }
-
-/* Responsive Solicitar Cita */
-@media (max-width: 768px) {
-    .datepicker-container {
-        flex-direction: column;
-    }
-    
-    .datepicker-left {
-        min-width: 100%;
-        padding: 20px;
-    }
-    
-    .custom-select-wrapper {
-        width: 100%;
-    }
-    
-    .available-appointments {
-        margin-top: 30px;
-    }
-    
-    .citas-disponibles-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-    }
-}
