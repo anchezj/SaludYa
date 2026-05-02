@@ -8,4 +8,7 @@ router.post('/register', authController.register);
 // Define la ruta POST para iniciar sesión
 router.post('/login', authController.login);
 
+// --- NUEVA RUTA: OLVIDAR CONTRASEÑA ---
+router.post('/forgot-password', authController.forgotPassword);
 module.exports = router;
+

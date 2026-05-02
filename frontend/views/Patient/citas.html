@@ -35,7 +35,7 @@
             <nav class="sidebar-nav">
                 <a href="#" class="nav-item">
                     <div class="nav-icon"><i class="ti ti-stethoscope"></i></div>
-                    {mi nombre}
+                    <span id="userMameDisplay">Cargando...</span>
                 </a>
                 <a href="#" class="nav-item">
                     <div class="nav-icon"><i class="ti ti-user"></i></div>
@@ -134,5 +134,29 @@
     </div>
 
 </body>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Obtener los datos del localStorage
+        const usuarioData = localStorage.getItem('usuario');
+        const token = localStorage.getItem('token');
+
+        // 2. Seguridad: Si no hay token o datos, mandar al login
+        if (!usuarioData || !token) {
+            window.location.href = '../../login.html';
+            return;
+        }
+
+        // 3. Convertir los datos de texto a un objeto real
+        const usuario = JSON.parse(usuarioData);
+
+        // 4. Mostrar el nombre en el sidebar
+        const nameDisplay = document.getElementById('userNameDisplay');
+        if (nameDisplay && usuario.nombre) {
+            nameDisplay.textContent = usuario.nombre;
+        }
+    });
+</script>
 
 </html>
