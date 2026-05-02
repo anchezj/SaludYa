@@ -2,7 +2,7 @@ const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
-const transporter = require('../config/mailer');
+const transporter = require('../utils/mailer');
 const { getWelcomeTemplate, getPasswordResetTemplate } = require('../utils/emailTemplates');
 const path = require('path');
 
