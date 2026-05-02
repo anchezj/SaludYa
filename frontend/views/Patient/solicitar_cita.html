@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SaludYa - Solicitar Cita</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-    <link rel="stylesheet" href="css/solicitar_cita.css">
+    <link rel="stylesheet" href="../../css/solicitar_cita.css">
 </head>
 
 <body class="dashboard-body">
@@ -18,15 +18,15 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-logo">
-                <img src="assest/logo.png" alt="SaludYa Logo">
+                <img src="../../assest/logo.png" alt="SaludYa Logo">
                 <h2 class="brand-name">SaludYa</h2>
             </div>
             <nav class="sidebar-nav">
                 <a href="#" class="nav-item">
                     <div class="nav-icon"><i class="ti ti-stethoscope"></i></div>
-                    Nombre paciente
+                    <span id="userNameDisplay">Nombre paciente</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="#" class="nav-item disabled">
                     <div class="nav-icon"><i class="ti ti-user"></i></div>
                     Perfil
                 </a>
@@ -34,7 +34,7 @@
                     <div class="nav-icon"><i class="ti ti-clipboard"></i></div>
                     Tus Citas
                 </a>
-                <a href="login.html" class="nav-item">
+                <a href="../../login.html" class="nav-item">
                     <div class="nav-icon"><i class="ti ti-logout"></i></div>
                     Cerrar Sesión
                 </a>
@@ -48,13 +48,13 @@
             <div class="form-section">
                 <div class="form-label">Selecciona la especialidad de la cita que deseas solicitar:</div>
                 <div class="custom-select-wrapper">
-                    <div class="custom-select">Espacialidad</div>
+                    <div class="custom-select">Especialidad</div>
                     <i class="ti ti-chevron-down custom-select-icon"></i>
                     <div class="select-dropdown">
-                        <div class="select-option">Psicologia</div>
-                        <div class="select-option">Psiquiatria</div>
+                        <div class="select-option">Psicología</div>
+                        <div class="select-option">Psiquiatría</div>
                         <div class="select-option">Psicoterapeuta</div>
-                        <div class="select-option">Psicologia Infantil</div>
+                        <div class="select-option">Psicología Infantil</div>
                     </div>
                 </div>
             </div>
@@ -66,98 +66,31 @@
                 <div class="datepicker-container">
                     <div class="datepicker-left">
                         <p>su cita será:</p>
-                        <div class="date-large">28</div>
-                        <div class="month-year">Abril<br>2026</div>
+                        <div class="date-large" id="display-day">28</div>
+                        <div class="month-year" id="display-month-year">Abril<br>2026</div>
                     </div>
                     <div class="datepicker-right">
-                        <div class="datepicker-header">
-                            <div class="datepicker-input-group">
-                                <input type="text" class="datepicker-input" value="28/04/2026">
-                                <i class="ti ti-calendar"></i>
-                            </div>
-                            <div class="datepicker-nav">
-                                <i class="ti ti-arrow-up"></i>
-                                <i class="ti ti-arrow-down"></i>
-                        <div class="calendar">
-                            <div class="calendar-header">
-                                <div class="calendar-month-year" id="calendar-month-year">abril de 2026 <i
-                                        class="ti ti-caret-down"></i></div>
-                                <div class="calendar-nav-buttons">
-                                    <button id="prev-month" class="calendar-btn"><i class="ti ti-arrow-up"></i></button>
-                                    <button id="next-month" class="calendar-btn"><i
-                                            class="ti ti-arrow-down"></i></button>
-                                </div>
-                            </div>
-                            <div class="calendar-weekdays">
-                                <div>Do</div>
-                                <div>Lu</div>
-                                <div>Ma</div>
-                                <div>Mi</div>
-                                <div>Ju</div>
-                                <div>Vi</div>
-                                <div>Sa</div>
-                            </div>
-                            <div class="calendar-days" id="calendar-days">
-                                <!-- Days will be generated by JS -->
+                        <div class="calendar-header">
+                            <div class="calendar-month-year" id="calendar-month-year">abril de 2026 <i
+                                    class="ti ti-caret-down"></i></div>
+                            <div class="calendar-nav-buttons">
+                                <button id="prev-month" class="calendar-btn"><i
+                                        class="ti ti-arrow-up"></i></button>
+                                <button id="next-month" class="calendar-btn"><i
+                                        class="ti ti-arrow-down"></i></button>
                             </div>
                         </div>
-                        <div class="calendar-month">abril de 2026 ▾</div>
-                        <div class="calendar-grid">
-                            <div class="calendar-day-header">DO</div>
-                            <div class="calendar-day-header">LU</div>
-                            <div class="calendar-day-header">MA</div>
-                            <div class="calendar-day-header">MI</div>
-                            <div class="calendar-day-header">JU</div>
-                            <div class="calendar-day-header">VI</div>
-                            <div class="calendar-day-header">SA</div>
-                            
-                            <div class="calendar-day muted">29</div>
-                            <div class="calendar-day muted">30</div>
-                            <div class="calendar-day muted">31</div>
-                            <div class="calendar-day">1</div>
-                            <div class="calendar-day">2</div>
-                            <div class="calendar-day">3</div>
-                            <div class="calendar-day">4</div>
-                            
-                            <div class="calendar-day">5</div>
-                            <div class="calendar-day">6</div>
-                            <div class="calendar-day">7</div>
-                            <div class="calendar-day">8</div>
-                            <div class="calendar-day">9</div>
-                            <div class="calendar-day">10</div>
-                            <div class="calendar-day">11</div>
-                            
-                            <div class="calendar-day">12</div>
-                            <div class="calendar-day">13</div>
-                            <div class="calendar-day">14</div>
-                            <div class="calendar-day">15</div>
-                            <div class="calendar-day">16</div>
-                            <div class="calendar-day">17</div>
-                            <div class="calendar-day">18</div>
-                            
-                            <div class="calendar-day">19</div>
-                            <div class="calendar-day">20</div>
-                            <div class="calendar-day">21</div>
-                            <div class="calendar-day">22</div>
-                            <div class="calendar-day">23</div>
-                            <div class="calendar-day">24</div>
-                            <div class="calendar-day">25</div>
-                            
-                            <div class="calendar-day">26</div>
-                            <div class="calendar-day">27</div>
-                            <div class="calendar-day active">28</div>
-                            <div class="calendar-day">29</div>
-                            <div class="calendar-day">30</div>
-                            <div class="calendar-day muted">1</div>
-                            <div class="calendar-day muted">2</div>
-                            
-                            <div class="calendar-day muted">3</div>
-                            <div class="calendar-day muted">4</div>
-                            <div class="calendar-day muted">5</div>
-                            <div class="calendar-day muted">6</div>
-                            <div class="calendar-day muted">7</div>
-                            <div class="calendar-day muted">8</div>
-                            <div class="calendar-day muted">9</div>
+                        <div class="calendar-weekdays">
+                            <div>Do</div>
+                            <div>Lu</div>
+                            <div>Ma</div>
+                            <div>Mi</div>
+                            <div>Ju</div>
+                            <div>Vi</div>
+                            <div>Sa</div>
+                        </div>
+                        <div class="calendar-days" id="calendar-days">
+                            <!-- Days generated by JS -->
                         </div>
                         <div class="datepicker-actions">
                             <span>Borrar</span>
@@ -175,7 +108,7 @@
                         <tr>
                             <th>Profesional</th>
                             <th>Fecha y hora</th>
-                            <th>Ubicacion</th>
+                            <th>Ubicación</th>
                             <th>Especialidad</th>
                             <th>Acción</th>
                         </tr>
@@ -209,7 +142,8 @@
         </main>
     </div>
 
+    <script src="../../js/script.js"></script>
+    <script src="../../js/solicitar_cita.js"></script>
 </body>
-<script src="js/script.js"></script>
 
 </html>

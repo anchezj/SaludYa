@@ -9,3 +9,7 @@ CREATE TABLE usuarios (
     rol VARCHAR(50) DEFAULT 'paciente',
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- alteracion de tabla para el reset de contraseña
+ALTER TABLE usuarios ADD COLUMN reset_token VARCHAR(255) DEFAULT NULL;
+ALTER TABLE usuarios ADD COLUMN reset_expires TIMESTAMP NULL DEFAULT NULL;

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludYa - Recuperar Contraseña</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Panel Derecho: Formulario de Petición -->
+        <div class="right-panel">
+            <div class="form-card">
+                <h2 class="form-title">RECUPERAR CUENTA</h2>
+                <p style="color: var(--info-normal); font-size: 14px; text-align: center; margin-bottom: 30px;">
+                    Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
+                </p>
+
+                <form id="forgotPasswordForm">
+                    <div class="input-group">
+                        <input type="email" id="email" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <div class="submit-container">
+                        <button type="submit" class="btn-solid register-btn" id="submitBtn">ENVIAR ENLACE</button>
+                    </div>
+                </form>
+
+                <div class="forgot-password" style="margin-top: 30px;">
+                    <a href="login.html" style="color: var(--info-normal); text-decoration: none; font-weight: 500;">
+                        <i class="ti ti-arrow-left"></i> Volver al inicio de sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Izquierdo: Branding -->
+        <div class="left-panel">
+            <div class="logo-wrapper">
+                <img src="assest/logo.png" alt="Logo SaludYa" class="logo-image">
+            </div>
+            <h1 class="welcome-title">Gestión de<br>Seguridad</h1>
+            <div class="login-prompt">
+                <p>¿Recordaste tu contraseña?</p>
+            </div>
+            <a href="login.html" class="btn-solid login-btn" style="text-decoration: none; display: inline-block; text-align: center;">INICIAR SESIÓN</a>
+        </div>
+    </div>
+
+    <!-- Script para manejar la petición al backend -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
