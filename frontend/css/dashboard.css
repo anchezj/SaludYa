@@ -292,3 +292,97 @@
 .text-danger {
     color: var(--danger-normal);
 }
+
+/* Responsive Dashboard */
+@media (max-width: 992px) {
+    .dashboard-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 30px 20px;
+        border-right: none;
+        border-bottom: 2px solid #f0f0f0;
+        align-items: center;
+    }
+
+    .sidebar-logo {
+        margin-bottom: 30px;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .nav-item {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .main-content {
+        padding: 40px 20px;
+        padding-bottom: 150px;
+    }
+
+    .header-card {
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .page-title {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .filters {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .filter-btn {
+        padding: 8px 20px;
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid #f0f0f0;
+        border-radius: 4px;
+    }
+    
+    .citas-table {
+        min-width: 700px; /* Force table to be wider than screen to enable scroll */
+    }
+
+    .actions-container {
+        justify-content: center;
+    }
+    
+    .contact-widget {
+        bottom: 20px;
+        left: 20px;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 10px;
+        border-radius: 30px;
+    }
+    
+    .contact-text {
+        display: none; /* Hide text on small screens, keep icon */
+    }
+    
+    .contact-widget:hover .contact-text {
+        display: block; /* Show on hover/tap if possible */
+    }
+}
