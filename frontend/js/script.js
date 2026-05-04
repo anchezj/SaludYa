@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isPublicPage = currentPath.includes('login.html') || 
                          currentPath.includes('registro.html') || 
                          currentPath.includes('olvido_contrasena.html') ||
+                         currentPath.includes('cambio_contrasena.html') ||
                          currentPath === '/';
 
     const usuarioData = localStorage.getItem('usuario');
