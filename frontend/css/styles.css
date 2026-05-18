@@ -101,6 +101,14 @@ body {
     /* Color Info Hover */
 }
 
+.role-group-label {
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+    text-align: left;
+}
+
 .btn-solid {
     background: var(--info-normal);
     /* Color Info Normal */

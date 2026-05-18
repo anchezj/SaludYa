@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Tu HTML de login usa el id "username", pero en BD es un email
                 const email = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
+                const selectedRole = document.querySelector('input[name="role"]:checked')?.value || 'especialista';
+                const expectedRole = selectedRole === 'afiliado' ? 'paciente' : 'especialista';
 
                 try {
                     const response = await fetch('http://localhost:3000/api/auth/login', {
@@ -21,18 +23,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        alert('¡Inicio de sesión exitoso!');
-                        // Guardar el Token en el navegador para usarlo después
-                        localStorage.setItem('token', data.token);
-                        // Guardar los datos del usuario
-                        localStorage.setItem('usuario', JSON.stringify(data.usuario));
-                        window.location.href = '/views/patient/citas.html';
+                        const userRole = data.usuario?.rol || 'paciente';
+
+                        if (userRole !== expectedRole) {
+                            AlertSystem.error('El rol seleccionado no coincide con tu cuenta');
+                            return;
+                        }
+
+                        AlertSystem.success('Inicio de sesión exitoso', 'Bienvenido a SaludYa', () => {
+                            // Guardar el Token en el navegador para usarlo después
+                            localStorage.setItem('token', data.token);
+                            // Guardar los datos del usuario
+                            localStorage.setItem('usuario', JSON.stringify(data.usuario));
+                            const redirectUrl = userRole === 'especialista'
+                                ? '/views/Doctor/cronograma_citas.html'
+                                : '/views/Patient/citas.html';
+                            window.location.href = redirectUrl;
+                        });
                     } else {
-                        alert('Error: ' + data.message);
+                        AlertSystem.error('Error: ' + data.message);
                     }
                 } catch (error) {
-                    console.error('Error al conectar:', error);
-                    alert('Error al conectar con el servidor.');
+                    AlertSystem.error('Error: al conectar con el servidor.');
                 }
 
             } else {
@@ -43,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const confirmPassword = document.getElementById('confirmPassword').value;
 
                 if (password !== confirmPassword) {
-                    alert('Las contraseñas no coinciden');
+                    AlertSystem.error('Contraseñas no coinciden');
                     return;
                 }
 
@@ -62,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        alert('¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.');
-                        window.location.href = 'login.html'; // Redirige a la pantalla de login
+                        AlertSystem.success('¡Cuenta creada exitosamente!', 'Ahora puedes iniciar sesión.', () => {
+                            window.location.href = 'login.html'; // Redirige a la pantalla de login
+                        });
                     } else {
-                        alert('Error: ' + data.message);
+                        AlertSystem.error('Error: ' + data.message);
                     }
                 } catch (error) {
-                    console.error('Error al conectar:', error);
-                    alert('Error al conectar con el servidor.');
+                    AlertSystem.error('Error al conectar con el servidor.');
                 }
             }
         });
@@ -96,15 +108,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
                 if (response.ok) {
-                    alert('Si el correo está registrado, recibirás un enlace de recuperación pronto.');
-                    localStorage.clear(); 
-                    window.location.href = 'login.html';
+                    AlertSystem.success('Envio de recuperación de contraseña exitoso', 'Revisa tu correo de recuperación de contraseña para acceder al sistema', () => {
+                        localStorage.clear();
+                        window.location.href = 'login.html';
+                    });
                 } else {
-                    alert('Error: ' + data.message);
+                    AlertSystem.error('Error', data.message);
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Error al conectar con el servidor.');
+                AlertSystem.error('Error: al conectar con el servidor.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'ENVIAR ENLACE';
