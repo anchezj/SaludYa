@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludYa - Cronograma de Citas</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/alerts.css">
+    <link rel="stylesheet" href="../../css/cronograma_citas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js"></script>
+</head>
+
+<body class="dashboard-body doctor-schedule-body">
+    <div class="doctor-schedule-frame">
+        <aside class="sidebar schedule-sidebar">
+            <div class="sidebar-logo schedule-logo">
+                <img src="../../assest/logo.png" alt="SaludYa Logo">
+                <h2 class="brand-name">SaludYa</h2>
+            </div>
+
+            <nav class="sidebar-nav schedule-nav">
+                <a href="pacientes_programados.html" class="nav-item">
+                    <div class="nav-icon"><i class="ti ti-stethoscope"></i></div>
+                    Pacientes Programados
+                </a>
+                <a href="perfil.html" class="nav-item">
+                    <div class="nav-icon"><i class="ti ti-user"></i></div>
+                    Perfil
+                </a>
+                <a href="../../login.html" class="nav-item">
+                    <div class="nav-icon"><i class="ti ti-logout"></i></div>
+                    Cerrar Sesión
+                </a>
+            </nav>
+        </aside>
+
+        <main class="schedule-main">
+            <section class="schedule-shell">
+                <header class="schedule-header">
+                    <h1 class="schedule-title">Cronograma de Citas</h1>
+                    <button type="button" class="schedule-report-btn">Generar Reporte</button>
+                </header>
+
+                <div id="calendar" class="calendar-shell"></div>
+            </section>
+        </main>
+    </div>
+
+    <div class="contact-widget schedule-contact">
+        <div class="contact-icon"><i class="ti ti-info-circle"></i></div>
+        <div class="contact-text">
+            <span>Tienes dudas?</span><br>
+            Contacta un agente en línea
+        </div>
+    </div>
+
+    <script src="../../js/alerts.js"></script>
+    <script src="../../js/script.js"></script>
+    <script src="../../js/doctor_cronograma.js"></script>
+</body>
+
+</html>

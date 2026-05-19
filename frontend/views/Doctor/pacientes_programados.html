@@ -7,6 +7,7 @@
     <title>SaludYa - Pacientes Programados</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/alerts.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
@@ -38,11 +39,15 @@
                 <h2 class="brand-name">SaludYa</h2>
             </div>
             <nav class="sidebar-nav">
-                <a href="#" class="nav-item active">
+                <a href="pacientes_programados.html" class="nav-item active">
                     <div class="nav-icon"><i class="ti ti-stethoscope"></i></div>
+                    Reporte de citas
+                </a>
+                <a href="cronograma_citas.html" class="nav-item">
+                    <div class="nav-icon"><i class="ti ti-calendar-event"></i></div>
                     Cronograma de citas
                 </a>
-                <a href="#" class="nav-item disabled">
+                <a href="perfil.html" class="nav-item">
                     <div class="nav-icon"><i class="ti ti-user"></i></div>
                     Perfil
                 </a>
@@ -62,6 +67,7 @@
                         <button class="filter-btn active">Reportes de Citas</button>
                         <button class="filter-btn success">Completadas</button>
                         <button class="filter-btn danger">Canceladas</button>
+                        <a href="cronograma_citas.html" class="filter-btn active" style="text-decoration: none; display: inline-flex; align-items: center;">Cronograma</a>
                     </div>
                 </div>
             </div>
@@ -110,6 +116,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="../../js/alerts.js"></script>
     <script src="../../js/script.js"></script>
 </body>
 

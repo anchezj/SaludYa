@@ -7,6 +7,7 @@
     <title>SaludYa - Actualización de Datos</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/alerts.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <style>
@@ -118,13 +119,17 @@
                 <h2 class="brand-name">SaludYa</h2>
             </div>
             <nav class="sidebar-nav">
-                <a href="#" class="nav-item active">
+                <a href="#" class="nav-item">
                     <div class="nav-icon"><i class="ti ti-stethoscope"></i></div>
-                    Nombre paciente
+                    <span id="userNameDisplay">Cargando...</span>
                 </a>
                 <a href="citas.html" class="nav-item">
                     <div class="nav-icon"><i class="ti ti-clipboard-list"></i></div>
                     Tus Citas
+                </a>
+                                <a href="solicitar_cita.html" class="nav-item">
+                    <div class="nav-icon"><i class="ti ti-calendar-plus"></i></div>
+                    Solicitar Cita
                 </a>
                 <a href="../../login.html" class="nav-item">
                     <div class="nav-icon"><i class="ti ti-logout"></i></div>
@@ -178,6 +183,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="../../js/alerts.js"></script>
     <script src="../../js/script.js"></script>
 </body>
 
