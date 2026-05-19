@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Guardar los datos del usuario
                             localStorage.setItem('usuario', JSON.stringify(data.usuario));
                             const redirectUrl = userRole === 'especialista'
-                                ? '/views/Doctor/cronograma_citas.html'
-                                : '/views/Patient/citas.html';
+                                ? 'views/Doctor/cronograma_citas.html'
+                                : 'views/Patient/citas.html';
                             window.location.href = redirectUrl;
                         });
                     } else {
@@ -126,11 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- SEGURIDAD: CONTROL DE SESIÓN (FIXED PARA EVITAR LOOP) ---
     const currentPath = window.location.pathname;
-    const isPublicPage = currentPath.includes('login.html') || 
-                         currentPath.includes('registro.html') || 
-                         currentPath.includes('olvido_contrasena.html') ||
-                         currentPath.includes('cambio_contrasena.html') ||
-                         currentPath === '/';
+    const isPublicPage = currentPath.includes('login.html') ||
+        currentPath.includes('registro.html') ||
+        currentPath.includes('olvido_contrasena.html') ||
+        currentPath.includes('cambio_contrasena.html') ||
+        currentPath === '/';
 
     const usuarioData = localStorage.getItem('usuario');
     const token = localStorage.getItem('token');
