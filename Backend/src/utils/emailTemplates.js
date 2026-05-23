@@ -52,4 +52,26 @@ const getPasswordResetTemplate = (nombre, resetLink) => {
     return getBaseTemplate(content, "Seguridad SaludYa");
 };
 
-module.exports = { getWelcomeTemplate, getPasswordResetTemplate };
+const getAppointmentTemplate = (nombre, fechaHora, especialidad) => {
+    // Formatear la fecha para que sea más legible (opcional)
+    const fecha = new Date(fechaHora).toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'short' });
+
+    const content = `
+<h2>¡Cita Confirmada, ${nombre}!</h2>
+<p>Tu cita ha sido agendada con éxito en nuestro sistema.</p>
+<p><strong>Detalles de tu cita:</strong></p>
+<ul>
+    <li><strong>Especialidad:</strong> ${especialidad}</li>
+    <li><strong>Fecha y Hora:</strong> ${fecha}</li>
+</ul>
+<p>Por favor, recuerda llegar con 15 minutos de anticipación. ¡Te esperamos!</p>
+    `;
+    return getBaseTemplate(content, "Confirmación de Cita - SaludYa");
+};
+
+
+
+
+module.exports = { getWelcomeTemplate, getPasswordResetTemplate, getAppointmentTemplate };
+
+

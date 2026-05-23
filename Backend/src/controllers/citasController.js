@@ -1,5 +1,8 @@
 const db = require('../config/db');
 const { v4: uuidv4 } = require('uuid');
+const transporter = require('../utils/mailer');
+const { getAppointmentTemplate } = require('../utils/emailTemplates');
+const path = require('path');
 
 exports.crearCita = async (req, res) => {
     try {
@@ -32,6 +35,34 @@ exports.crearCita = async (req, res) => {
         const query = 'INSERT INTO citas (id_cita, id_usuario, fecha_hora, motivo, estado) VALUES (?, ?, ?, ?, ?)';
         // Insertar la nueva cita
         await db.query(query, [id_cita, id_usuario, fecha_hora, motivo, 'programada']);
+
+
+        try {
+            // 1. Obtener el correo y nombre del paciente usando su id_usuario
+            const [users] = await db.query('SELECT nombre, email FROM usuarios WHERE id_usuario = ?', [id_usuario]);
+
+            if (users.length > 0) {
+                const paciente = users[0];
+
+                // 2. Enviar el correo
+                await transporter.sendMail({
+                    from: '"SaludYa 🏥" <' + process.env.EMAIL_USER + '>',
+                    to: paciente.email,
+                    subject: "Confirmación de Cita - SaludYa 🏥",
+                    html: getAppointmentTemplate(paciente.nombre, fecha_hora, motivo),
+                    attachments: [{
+                        filename: 'logo.png',
+                        path: path.join(__dirname, '../../../frontend/assest/logo.png'),
+                        cid: 'logo_saludya'
+                    }]
+                });
+                console.log('Correo de confirmación de cita enviado a:', paciente.email);
+            }
+        } catch (mailError) {
+            console.error('Error enviando correo de confirmación de cita:', mailError);
+        }
+
+
 
         res.status(201).json({ message: 'Cita creada exitosamente', id_cita });
     } catch (error) {
@@ -88,7 +119,7 @@ exports.actualizarEstado = async (req, res) => {
     try {
         const { id_cita } = req.params;
         const { nuevoEstado } = req.body;
-        const allowed = ['programada','en curso','cancelada','reprogramada','asistio'];
+        const allowed = ['programada', 'en curso', 'cancelada', 'reprogramada', 'asistio'];
         if (!allowed.includes(nuevoEstado)) {
             return res.status(400).json({ message: 'Estado no permitido' });
         }
