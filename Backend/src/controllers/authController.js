@@ -164,3 +164,53 @@ exports.resetPassword = async (req, res) => {
     }
 };
 
+// --- NUEVA FUNCIÓN: OBTENER PERFIL ---
+exports.getProfile = async (req, res) => {
+    try {
+        const id_usuario = req.usuario.id;
+        const [users] = await db.query(
+            'SELECT nombre, email, numero_contacto, edad, fecha_nacimiento, direccion FROM usuarios WHERE id_usuario = ?',
+            [id_usuario]
+        );
+
+        if (users.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        res.json(users[0]);
+    } catch (error) {
+        console.error('Error al obtener perfil:', error);
+        res.status(500).json({ message: 'Error interno del servidor.' });
+    }
+};
+
+// --- NUEVA FUNCIÓN: ACTUALIZAR PERFIL ---
+exports.updateProfile = async (req, res) => {
+    try {
+        const id_usuario = req.usuario.id;
+        const { nombre, email, numero_contacto, edad, fecha_nacimiento, direccion } = req.body;
+
+        const query = `
+            UPDATE usuarios 
+            SET nombre = ?, email = ?, numero_contacto = ?, edad = ?, fecha_nacimiento = ?, direccion = ?
+            WHERE id_usuario = ?
+        `;
+        
+        // Asignamos NULL si no vienen los datos para evitar errores si el string viene vacío
+        await db.query(query, [
+            nombre || null, 
+            email || null, 
+            numero_contacto || null, 
+            edad || null, 
+            fecha_nacimiento || null, 
+            direccion || null, 
+            id_usuario
+        ]);
+
+        res.json({ message: 'Perfil actualizado exitosamente' });
+    } catch (error) {
+        console.error('Error al actualizar perfil:', error);
+        res.status(500).json({ message: 'Error interno del servidor.' });
+    }
+};
+
