@@ -92,8 +92,6 @@ SaludYa/
 
 
 6. **Proximas Actualizaciones**:
-   - Creacio de cita desde el meodulo
-   - Visualizacion de la citas en un cronograma
    - Descargar un reporte de la citas mensual
    - Envio de notificacione y recordatorio de la citas al correo (opcional WhatsApp)
 ---
