@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const transporter = require('../utils/mailer');
 const { getAppointmentTemplate } = require('../utils/emailTemplates');
 const path = require('path');
+const { getStatusUpdateTemplate } = require('../utils/emailTemplates');
 
 exports.crearCita = async (req, res) => {
     try {
@@ -123,9 +124,41 @@ exports.actualizarEstado = async (req, res) => {
         if (!allowed.includes(nuevoEstado)) {
             return res.status(400).json({ message: 'Estado no permitido' });
         }
+
+        // 1. Actualizar el estado en la base de datos
         const query = 'UPDATE citas SET estado = ? WHERE id_cita = ?';
         await db.query(query, [nuevoEstado, id_cita]);
-        res.json({ message: 'Estado actualizado' });
+
+        // 2. Obtener los datos de la cita y del paciente para el correo
+        const citaQuery = `
+            SELECT c.fecha_hora, c.motivo, u.nombre, u.email 
+            FROM citas c 
+            JOIN usuarios u ON c.id_usuario = u.id_usuario 
+            WHERE c.id_cita = ?
+        `;
+        const [citaData] = await db.query(citaQuery, [id_cita]);
+
+        // 3. Enviar el correo si se encontraron los datos
+        if (citaData.length > 0) {
+            const cita = citaData[0];
+            try {
+                await transporter.sendMail({
+                    from: '"SaludYa 🏥" <' + process.env.EMAIL_USER + '>',
+                    to: cita.email,
+                    subject: "Actualización de Estado de Cita - SaludYa 🏥",
+                    html: getStatusUpdateTemplate(cita.nombre, cita.fecha_hora, cita.motivo, nuevoEstado),
+                    attachments: [{
+                        filename: 'logo.png',
+                        path: path.join(__dirname, '../../../frontend/assest/logo.png'),
+                        cid: 'logo_saludya'
+                    }]
+                });
+                console.log('Correo de actualización enviado a:', cita.email);
+            } catch (mailError) {
+                console.error('Error enviando correo de actualización de estado:', mailError);
+            }
+        }
+        res.json({ message: 'Estado actualizado y correo enviado' });
     } catch (error) {
         console.error('Error actualizando estado:', error);
         res.status(500).json({ message: 'Error interno' });

@@ -11,36 +11,145 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <style>
+        /* ---- Tarjeta info del paciente ---- */
+        .info-card {
+            background: linear-gradient(135deg, #1a9fb0 0%, #0d7a8a 100%);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(26, 159, 176, 0.35);
+            padding: 32px 36px;
+            max-width: 600px;
+            margin: 32px auto 0;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .info-card-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+
+        .info-card-name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .info-card-role {
+            font-size: 12px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px 24px;
+        }
+
+        .info-item label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .info-item span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .info-item span.empty {
+            opacity: 0.45;
+            font-style: italic;
+        }
+
+        /* ---- Tarjeta formulario ---- */
         .profile-card {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             padding: 40px;
             max-width: 600px;
-            margin: 40px auto;
+            margin: 24px auto 40px;
             text-align: left;
         }
 
         .profile-title {
             color: #1a9fb0;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
         }
 
-        .profile-data {
+        .form-group {
             margin-bottom: 20px;
-            font-size: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
             color: #555;
-            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #75cdd8;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #1a9fb0;
+            box-sizing: border-box;
+            background-color: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #1a9fb0;
+        }
+
+        .form-input::placeholder {
+            color: #92d4dd;
+            font-size: 12px;
+            text-transform: uppercase;
         }
 
         .profile-btn-container {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 40px;
         }
 
         .btn-update {
@@ -61,6 +170,11 @@
             background-color: #158291;
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
         }
+
+        .btn-update:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 
@@ -74,14 +188,15 @@
         </svg>
     </div>
 
-    <!-- Info Widget -->
-    <div class="contact-widget">
-        <div class="contact-icon"><i class="ti ti-info-circle"></i></div>
+    <!-- Info Widget - WhatsApp -->
+    <a href="https://wa.me/573242340823?text=Hola%2C%20tengo%20una%20consulta%20sobre%20SaludYa" target="_blank"
+        rel="noopener noreferrer" class="contact-widget" style="text-decoration: none; color: inherit;">
+        <div class="contact-icon"><i class="ti ti-brand-whatsapp"></i></div>
         <div class="contact-text">
             <span>¿Tienes dudas?</span><br>
             Contacta un agente en línea
         </div>
-    </div>
+    </a>
 
     <div class="dashboard-layout">
         <!-- Sidebar -->
@@ -107,32 +222,80 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content" style="display: flex; align-items: center; justify-content: center;">
-            <div class="profile-card">
-                <h2 class="profile-title">MIS DATOS</h2>
+        <main class="main-content" style="display: flex; flex-direction: column; align-items: center;">
 
-                <div class="profile-data">
-                    Nombre del Profesional : Doctor Eddison
+            <!-- Tarjeta de información actual -->
+            <div class="info-card" id="infoCard">
+                <div class="info-card-header">
+                    <div class="info-card-avatar">👤</div>
+                    <div>
+                        <div class="info-card-name" id="ic-nombre">Cargando...</div>
+                        <div class="info-card-role">Profesional</div>
+                    </div>
                 </div>
-                <div class="profile-data">
-                    Correo Electronico : Eddison@gmail.com
+                <div class="info-card-grid">
+                    <div class="info-item">
+                        <label>Correo</label>
+                        <span id="ic-email">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Teléfono</label>
+                        <span id="ic-contacto">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Edad</label>
+                        <span id="ic-edad">—</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Fecha de Nacimiento</label>
+                        <span id="ic-nacimiento">—</span>
+                    </div>
+                    <div class="info-item" style="grid-column: span 2;">
+                        <label>Dirección</label>
+                        <span id="ic-direccion">—</span>
+                    </div>
                 </div>
-                <div class="profile-data">
-                    Numero de contacto: 3489784569
+                <!-- BOTÓN MOVIDO ARRIBA -->
+                <div style="text-align: center; margin-top: 25px;">
+                    <button id="btnDesplegarForm" type="button" class="btn-update">ACTUALIZAR INFORMACIÓN</button>
                 </div>
-                <div class="profile-data">
-                    Edad : 35
-                </div>
-                <div class="profile-data">
-                    Fecha de Nacimiento : 25/06/1990
-                </div>
-                <div class="profile-data">
-                    Direcion: Calle 100 # 15 - 45
-                </div>
+            </div>
 
-                <div class="profile-btn-container">
-                    <button class="btn-update">ACTUALIZAR INFORMACIÓN</button>
-                </div>
+            <!-- Formulario de actualización (Oculto por defecto con display: none) -->
+            <div class="profile-card" id="formularioContainer" style="display: none; width: 100%;">
+                <h2 class="profile-title">ACTUALIZACION DE<br>DATOS</h2>
+
+                <form id="perfilForm" action="#" method="POST">
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Usuario</label>
+                        <input id="f-nombre" type="text" class="form-input" placeholder="INGRESE LA INFORMACION">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Correo Electronico del Usuario</label>
+                        <input id="f-email" type="email" class="form-input" placeholder="INGRESE LA INFORMACION">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Numero de contacto</label>
+                        <input id="f-contacto" type="tel" class="form-input" placeholder="INGRESE LA INFORMACION">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Edad</label>
+                        <input id="f-edad" type="number" class="form-input" placeholder="INGRESE LA INFORMACION">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <input id="f-nacimiento" type="date" class="form-input" placeholder="INGRESE LA INFORMACION">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Direcion del Usuario</label>
+                        <input id="f-direccion" type="text" class="form-input" placeholder="INGRESE LA INFORMACION">
+                    </div>
+
+                    <div class="profile-btn-container">
+                        <button id="btnActualizar" type="submit" class="btn-update"
+                            style="background-color: #2ECC71;">GUARDAR CAMBIOS</button>
+                    </div>
+                </form>
             </div>
         </main>
     </div>
@@ -140,6 +303,125 @@
     <!-- Scripts -->
     <script src="../../js/alerts.js"></script>
     <script src="../../js/script.js"></script>
+    <script>
+        const API = 'http://localhost:3000/api/auth';
+
+        // Mostrar valor en la tarjeta de info (con fallback si está vacío)
+        function setInfo(id, value) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (value) {
+                el.textContent = value;
+                el.classList.remove('empty');
+            } else {
+                el.textContent = 'Sin registrar';
+                el.classList.add('empty');
+            }
+        }
+
+        document.getElementById('btnDesplegarForm').addEventListener('click', () => {
+            const formContainer = document.getElementById('formularioContainer');
+            if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+                formContainer.style.display = 'block';
+            } else {
+                formContainer.style.display = 'none';
+            }
+        });
+
+        // Cargar perfil desde el servidor y rellenar ambas secciones
+        async function cargarPerfil() {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+
+            try {
+                const resp = await fetch(`${API}/profile`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!resp.ok) return;
+
+                const data = await resp.json();
+
+                // --- Tarjeta de información ---
+                setInfo('ic-nombre', data.nombre);
+                setInfo('ic-email', data.email);
+                setInfo('ic-contacto', data.numero_contacto);
+                setInfo('ic-edad', data.edad ? `${data.edad} años` : null);
+                setInfo('ic-nacimiento', data.fecha_nacimiento
+                    ? new Date(data.fecha_nacimiento).toLocaleDateString('es-ES')
+                    : null);
+                setInfo('ic-direccion', data.direccion);
+
+                // --- Pre-rellenar formulario ---
+                document.getElementById('f-nombre').value = data.nombre || '';
+                document.getElementById('f-email').value = data.email || '';
+                document.getElementById('f-contacto').value = data.numero_contacto || '';
+                document.getElementById('f-edad').value = data.edad || '';
+                document.getElementById('f-nacimiento').value = data.fecha_nacimiento
+                    ? data.fecha_nacimiento.split('T')[0]
+                    : '';
+                document.getElementById('f-direccion').value = data.direccion || '';
+
+            } catch (err) {
+                console.error('Error cargando perfil:', err);
+            }
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('perfilForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const token = localStorage.getItem('token');
+            const btn = document.getElementById('btnActualizar');
+
+            btn.disabled = true;
+            btn.textContent = 'Guardando...';
+
+            const payload = {
+                nombre: document.getElementById('f-nombre').value.trim(),
+                email: document.getElementById('f-email').value.trim(),
+                numero_contacto: document.getElementById('f-contacto').value.trim(),
+                edad: document.getElementById('f-edad').value || null,
+                fecha_nacimiento: document.getElementById('f-nacimiento').value || null,
+                direccion: document.getElementById('f-direccion').value.trim()
+            };
+
+            try {
+                const resp = await fetch(`${API}/profile`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await resp.json();
+
+                if (resp.ok) {
+                    // Actualizar el nombre en el localStorage para que el sidebar lo refleje
+                    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+                    usuario.nombre = payload.nombre;
+                    localStorage.setItem('usuario', JSON.stringify(usuario));
+
+                    document.getElementById('formularioContainer').style.display = 'none';
+
+                    AlertSystem.success('¡Perfil actualizado!', 'Tus datos han sido guardados correctamente.', () => {
+                        cargarPerfil(); // Refrescar la tarjeta
+                    });
+                } else {
+                    AlertSystem.error('Error', data.message || 'No se pudo actualizar.');
+                }
+            } catch (err) {
+                AlertSystem.error('Error', 'No se pudo conectar con el servidor.');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'ACTUALIZAR INFORMACIÓN';
+            }
+        });
+
+        // Iniciar carga al cargar la página
+        cargarPerfil();
+    </script>
 </body>
 
 </html>

@@ -262,6 +262,11 @@
     background-color: var(--success-normal);
 }
 
+.status-cancelada {
+    background-color: var(--danger-normal);
+}
+
+
 .status-pendiente {
     background-color: var(--warning-normal);
 }
@@ -332,7 +337,7 @@
         width: 100%;
         padding: 20px;
     }
-    
+
     .page-title {
         font-size: 32px;
         margin-bottom: 20px;
@@ -361,15 +366,16 @@
         border: 1px solid #f0f0f0;
         border-radius: 4px;
     }
-    
+
     .citas-table {
-        min-width: 700px; /* Force table to be wider than screen to enable scroll */
+        min-width: 700px;
+        /* Force table to be wider than screen to enable scroll */
     }
 
     .actions-container {
         justify-content: center;
     }
-    
+
     .contact-widget {
         bottom: 20px;
         left: 20px;
@@ -377,12 +383,14 @@
         padding: 10px;
         border-radius: 30px;
     }
-    
+
     .contact-text {
-        display: none; /* Hide text on small screens, keep icon */
+        display: none;
+        /* Hide text on small screens, keep icon */
     }
-    
+
     .contact-widget:hover .contact-text {
-        display: block; /* Show on hover/tap if possible */
+        display: block;
+        /* Show on hover/tap if possible */
     }
 }

@@ -23,43 +23,55 @@
             position: relative;
             overflow: hidden;
         }
+
         .info-card::before {
             content: '';
             position: absolute;
-            top: -40px; right: -40px;
-            width: 160px; height: 160px;
-            background: rgba(255,255,255,0.08);
+            top: -40px;
+            right: -40px;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 50%;
         }
+
         .info-card-header {
             display: flex;
             align-items: center;
             gap: 16px;
             margin-bottom: 24px;
         }
+
         .info-card-avatar {
-            width: 60px; height: 60px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 26px;
         }
+
         .info-card-name {
             font-size: 20px;
             font-weight: 700;
             letter-spacing: 0.3px;
         }
+
         .info-card-role {
             font-size: 12px;
             opacity: 0.8;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
         .info-card-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px 24px;
         }
+
         .info-item label {
             font-size: 10px;
             text-transform: uppercase;
@@ -68,10 +80,12 @@
             display: block;
             margin-bottom: 3px;
         }
+
         .info-item span {
             font-size: 14px;
             font-weight: 500;
         }
+
         .info-item span.empty {
             opacity: 0.45;
             font-style: italic;
@@ -174,14 +188,15 @@
         </svg>
     </div>
 
-    <!-- Info Widget -->
-    <div class="contact-widget">
-        <div class="contact-icon"><i class="ti ti-info-circle"></i></div>
+    <!-- Info Widget - WhatsApp -->
+    <a href="https://wa.me/573242340823?text=Hola%2C%20tengo%20una%20consulta%20sobre%20SaludYa" target="_blank"
+        rel="noopener noreferrer" class="contact-widget" style="text-decoration: none; color: inherit;">
+        <div class="contact-icon"><i class="ti ti-brand-whatsapp"></i></div>
         <div class="contact-text">
             <span>¿Tienes dudas?</span><br>
             Contacta un agente en línea
         </div>
-    </div>
+    </a>
 
     <div class="dashboard-layout">
         <!-- Sidebar -->
@@ -199,7 +214,7 @@
                     <div class="nav-icon"><i class="ti ti-clipboard-list"></i></div>
                     Tus Citas
                 </a>
-                                <a href="solicitar_cita.html" class="nav-item">
+                <a href="solicitar_cita.html" class="nav-item">
                     <div class="nav-icon"><i class="ti ti-calendar-plus"></i></div>
                     Solicitar Cita
                 </a>
@@ -244,45 +259,45 @@
                         <span id="ic-direccion">—</span>
                     </div>
                 </div>
+                <!-- BOTÓN MOVIDO ARRIBA -->
+                <div style="text-align: center; margin-top: 25px;">
+                    <button id="btnDesplegarForm" type="button" class="btn-update">ACTUALIZAR INFORMACIÓN</button>
+                </div>
             </div>
 
-            <!-- Formulario de actualización (sin modificar su estructura) -->
-            <div class="profile-card">
+            <!-- Formulario de actualización (Oculto por defecto con display: none) -->
+            <div class="profile-card" id="formularioContainer" style="display: none; width: 100%;">
                 <h2 class="profile-title">ACTUALIZACION DE<br>DATOS</h2>
-                
+
                 <form id="perfilForm" action="#" method="POST">
                     <div class="form-group">
                         <label class="form-label">Nombre del Usuario</label>
                         <input id="f-nombre" type="text" class="form-input" placeholder="INGRESE LA INFORMACION">
                     </div>
-                    
                     <div class="form-group">
                         <label class="form-label">Correo Electronico del Usuario</label>
                         <input id="f-email" type="email" class="form-input" placeholder="INGRESE LA INFORMACION">
                     </div>
-                    
                     <div class="form-group">
                         <label class="form-label">Numero de contacto</label>
                         <input id="f-contacto" type="tel" class="form-input" placeholder="INGRESE LA INFORMACION">
                     </div>
-                    
                     <div class="form-group">
                         <label class="form-label">Edad</label>
                         <input id="f-edad" type="number" class="form-input" placeholder="INGRESE LA INFORMACION">
                     </div>
-                    
                     <div class="form-group">
                         <label class="form-label">Fecha de Nacimiento</label>
                         <input id="f-nacimiento" type="date" class="form-input" placeholder="INGRESE LA INFORMACION">
                     </div>
-                    
                     <div class="form-group">
                         <label class="form-label">Direcion del Usuario</label>
                         <input id="f-direccion" type="text" class="form-input" placeholder="INGRESE LA INFORMACION">
                     </div>
 
                     <div class="profile-btn-container">
-                        <button id="btnActualizar" type="submit" class="btn-update">ACTUALIZAR INFORMACIÓN</button>
+                        <button id="btnActualizar" type="submit" class="btn-update"
+                            style="background-color: #2ECC71;">GUARDAR CAMBIOS</button>
                     </div>
                 </form>
             </div>
@@ -308,6 +323,15 @@
             }
         }
 
+        document.getElementById('btnDesplegarForm').addEventListener('click', () => {
+            const formContainer = document.getElementById('formularioContainer');
+            if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+                formContainer.style.display = 'block';
+            } else {
+                formContainer.style.display = 'none';
+            }
+        });
+
         // Cargar perfil desde el servidor y rellenar ambas secciones
         async function cargarPerfil() {
             const token = localStorage.getItem('token');
@@ -323,20 +347,20 @@
                 const data = await resp.json();
 
                 // --- Tarjeta de información ---
-                setInfo('ic-nombre',     data.nombre);
-                setInfo('ic-email',      data.email);
-                setInfo('ic-contacto',   data.numero_contacto);
-                setInfo('ic-edad',       data.edad ? `${data.edad} años` : null);
+                setInfo('ic-nombre', data.nombre);
+                setInfo('ic-email', data.email);
+                setInfo('ic-contacto', data.numero_contacto);
+                setInfo('ic-edad', data.edad ? `${data.edad} años` : null);
                 setInfo('ic-nacimiento', data.fecha_nacimiento
                     ? new Date(data.fecha_nacimiento).toLocaleDateString('es-ES')
                     : null);
-                setInfo('ic-direccion',  data.direccion);
+                setInfo('ic-direccion', data.direccion);
 
                 // --- Pre-rellenar formulario ---
-                document.getElementById('f-nombre').value    = data.nombre || '';
-                document.getElementById('f-email').value     = data.email || '';
-                document.getElementById('f-contacto').value  = data.numero_contacto || '';
-                document.getElementById('f-edad').value      = data.edad || '';
+                document.getElementById('f-nombre').value = data.nombre || '';
+                document.getElementById('f-email').value = data.email || '';
+                document.getElementById('f-contacto').value = data.numero_contacto || '';
+                document.getElementById('f-edad').value = data.edad || '';
                 document.getElementById('f-nacimiento').value = data.fecha_nacimiento
                     ? data.fecha_nacimiento.split('T')[0]
                     : '';
@@ -351,25 +375,25 @@
         document.getElementById('perfilForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const token = localStorage.getItem('token');
-            const btn   = document.getElementById('btnActualizar');
+            const btn = document.getElementById('btnActualizar');
 
-            btn.disabled   = true;
+            btn.disabled = true;
             btn.textContent = 'Guardando...';
 
             const payload = {
-                nombre:           document.getElementById('f-nombre').value.trim(),
-                email:            document.getElementById('f-email').value.trim(),
-                numero_contacto:  document.getElementById('f-contacto').value.trim(),
-                edad:             document.getElementById('f-edad').value || null,
+                nombre: document.getElementById('f-nombre').value.trim(),
+                email: document.getElementById('f-email').value.trim(),
+                numero_contacto: document.getElementById('f-contacto').value.trim(),
+                edad: document.getElementById('f-edad').value || null,
                 fecha_nacimiento: document.getElementById('f-nacimiento').value || null,
-                direccion:        document.getElementById('f-direccion').value.trim()
+                direccion: document.getElementById('f-direccion').value.trim()
             };
 
             try {
                 const resp = await fetch(`${API}/profile`, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type':  'application/json',
+                        'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(payload)
@@ -383,6 +407,8 @@
                     usuario.nombre = payload.nombre;
                     localStorage.setItem('usuario', JSON.stringify(usuario));
 
+                    document.getElementById('formularioContainer').style.display = 'none';
+
                     AlertSystem.success('¡Perfil actualizado!', 'Tus datos han sido guardados correctamente.', () => {
                         cargarPerfil(); // Refrescar la tarjeta
                     });
@@ -392,7 +418,7 @@
             } catch (err) {
                 AlertSystem.error('Error', 'No se pudo conectar con el servidor.');
             } finally {
-                btn.disabled    = false;
+                btn.disabled = false;
                 btn.textContent = 'ACTUALIZAR INFORMACIÓN';
             }
         });

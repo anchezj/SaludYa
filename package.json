@@ -1,6 +1,7 @@
 {
   "name": "saludya",
   "private": true,
+<<<<<<< HEAD
   "scripts": {
     "test": "jest --runInBand",
     "test:watch": "jest --watch",
@@ -9,8 +10,19 @@
   "devDependencies": {
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.0"
+=======
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest --runInBand --passWithNoTests",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --runInBand --coverage --passWithNoTests"
+>>>>>>> 167c04e06c21db67416a1faa82d33cec53a61a88
   },
   "dependencies": {
     "nodemailer": "^8.0.7"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0"
   }
 }
