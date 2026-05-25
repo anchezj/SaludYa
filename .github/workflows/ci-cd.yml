@@ -10,38 +10,29 @@ on:
       - main
 
 jobs:
-
   test:
     runs-on: ubuntu-latest
 
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
-      - name: Clonar repositorio
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Instalar Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
-      - name: Instalar dependencias
+      - name: Install dependencies
         run: npm install
 
-      - name: Ejecutar lint
+      - name: Run lint
         run: npm run lint
 
-      - name: Ejecutar pruebas
+      - name: Run tests
         run: npm test
 
-      - name: Build del proyecto
+      - name: Build project
         run: npm run build
-
-  deploy:
-    needs: test
-
-    if: github.ref == 'refs/heads/main'
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Deploy producción
-        run: echo "Desplegando SaludYa..."
