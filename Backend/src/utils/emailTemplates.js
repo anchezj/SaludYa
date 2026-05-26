@@ -69,9 +69,24 @@ const getAppointmentTemplate = (nombre, fechaHora, especialidad) => {
     return getBaseTemplate(content, "Confirmación de Cita - SaludYa");
 };
 
+const getStatusUpdateTemplate = (nombre, fechaHora, especialidad, nuevoEstado) => {
+    const fecha = new Date(fechaHora).toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'short' });
+
+    const content = `
+<h2>Actualización de Cita, ${nombre}</h2>
+<p>El estado de tu cita ha sido actualizado a: <strong style="text-transform: uppercase;">${nuevoEstado}</strong>.</p>
+<p><strong>Detalles de tu cita:</strong></p>
+<ul>
+    <li><strong>Especialidad/Motivo:</strong> ${especialidad}</li>
+    <li><strong>Fecha y Hora:</strong> ${fecha}</li>
+</ul>
+<p>Si tienes alguna duda con respecto a este cambio, por favor contáctanos.</p>
+    `;
+    return getBaseTemplate(content, "Actualización de Estado de Cita - SaludYa");
+};
 
 
 
-module.exports = { getWelcomeTemplate, getPasswordResetTemplate, getAppointmentTemplate };
+module.exports = { getWelcomeTemplate, getPasswordResetTemplate, getAppointmentTemplate, getStatusUpdateTemplate };
 
 

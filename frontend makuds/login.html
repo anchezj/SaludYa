@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludYa - Crear Cuenta</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/alerts.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Panel Derecho: Formulario de Registro -->
+        <div class="right-panel">
+            <div class="form-card">
+                <h2 class="form-title" id="formTitle">INICIAR SESION</h2>
+
+                <form id="authForm">
+                    <div class="input-group" id="userGroup">
+                        <input type="text" id="username" placeholder="Ingresar usuario" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Ingresar contraseña" required>
+                    </div>
+
+                    <p class="role-group-label">Selecciona el tipo de acceso</p>
+                    <div class="role-group">
+                        <label class="custom-radio">
+                            Afiliado
+                            <input type="radio" name="role" value="afiliado">
+                            <span class="radio-mark"></span>
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="role" value="especialista" checked>
+                            <span class="radio-mark"></span>
+                            Especialista
+                        </label>
+                    </div>
+
+                    <div class="forgot-password">
+                        <a href="olvido_contrasena.html">Recordar contraseña</a>
+                    </div>
+
+                    <div class="submit-container">
+                        <button type="submit" class="btn-solid register-btn" id="submitBtn">INICIAR SESIÓN</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Panel Izquierdo: Bienvenida y Logo -->
+        <div class="left-panel">
+            <div class="logo-wrapper">
+                <img src="assest/logo.png" alt="Logo SaludYa" class="logo-image">
+            </div>
+
+            <h1 class="welcome-title">Bienvenido a<br>SaludYa</h1>
+
+            <div class="login-prompt">
+                <a class="login-link">Quieres crear una cuenta?</a>
+            </div>
+
+            <a href="registro.html" class="btn-solid login-btn"
+                style="text-decoration: none; display: inline-block; text-align: center;">REGISTRARSE</a>
+        </div>
+
+
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/alerts.js"></script>
+</body>
+
+</html>
