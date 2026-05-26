@@ -90,6 +90,34 @@ SaludYa/
 5. **Acceder al Frontend**:
    - Abre el archivo `frontend/login.html` en tu navegador o usa un servidor local (como Live Server en VS Code).
 
+## 📚 Documentación Técnica del Proyecto
+
+El proyecto cuenta con documentación técnica completa para facilitar la comprensión, instalación y mantenimiento del sistema.
+
+### README del Repositorio
+Este archivo contiene:
+- Descripción del proyecto
+- Guía de instalación del sistema
+- Arquitectura general del sistema
+- Tecnologías utilizadas
+- Instrucciones para ejecutar el proyecto localmente
+
+### Documentación de API
+La documentación de los endpoints está disponible mediante ¿
+
+### Documentación del Código
+El código utiliza **JSDoc** para documentar funciones clave:
+- **Backend**: Todos los controladores, middlewares y utilidades incluyen comentarios JSDoc descriptivos
+- **Frontend**: Funciones principales están documentadas para facilitar el mantenimiento
+
+### Wiki del Repositorio
+Se mantiene una **Wiki activa en GitHub** con información adicional:
+- Guías de desarrollo
+- Explicación de la arquitectura detallada
+- Solución de problemas comunes
+- Contribuciones y mejores prácticas
+
+---
 
 6. **Proximas Actualizaciones**:
    - Descargar un reporte de la citas mensual
