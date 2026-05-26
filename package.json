@@ -4,17 +4,12 @@
   "private": true,
   "scripts": {
     "test": "jest --runInBand --passWithNoTests",
-<<<<<<< HEAD
-    "start": "node Backend/index.js",
-    "dev": "nodemon Backend/index.js",
-    "lint": "echo 'Linting disabled'",
-    "build": "echo 'Build completed'"
-=======
     "test:watch": "jest --watch",
     "test:coverage": "jest --runInBand --coverage --passWithNoTests",
+    "start": "node Backend/index.js",
+    "dev": "nodemon Backend/index.js",
     "lint": "echo \"No linter configured\"",
     "build": "echo \"No build step required\""
->>>>>>> 04f38973e5bf381c20548c6cc17838216dc9462e
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
