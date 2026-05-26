@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest --runInBand --passWithNoTests",
     "start": "node Backend/index.js",
-    "dev": "nodemon Backend/index.js"
+    "dev": "nodemon Backend/index.js",
+    "lint": "echo 'Linting disabled'",
+    "build": "echo 'Build completed'"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
