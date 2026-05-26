@@ -12,11 +12,13 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Verificamos si la conexión es correcta
-transporter.verify().then(() => {
-    console.log('✅ Servidor de correos listo');
-}).catch((error) => {
-    console.error('❌ Error en mailer.js:', error);
-});
+// Verificamos si la conexión es correcta (solo en ambiente de producción)
+if (process.env.NODE_ENV !== 'test') {
+    transporter.verify().then(() => {
+        console.log('✅ Servidor de correos listo');
+    }).catch((error) => {
+        console.error('❌ Error en mailer.js:', error);
+    });
+}
 
 module.exports = transporter;

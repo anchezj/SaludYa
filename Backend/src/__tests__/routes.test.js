@@ -7,7 +7,9 @@ jest.mock('../controllers/authController', () => ({
   register: jest.fn(),
   login: jest.fn(),
   forgotPassword: jest.fn(),
-  resetPassword: jest.fn()
+  resetPassword: jest.fn(),
+  getProfile: jest.fn(),
+  updateProfile: jest.fn()
 }));
 
 jest.mock('../controllers/citasController', () => ({
