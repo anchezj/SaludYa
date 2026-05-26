@@ -1,19 +1,13 @@
 {
   "name": "saludya",
-  "private": true,
-  "scripts": {
-    "test": "jest --runInBand",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --runInBand --coverage"
-  },
-  "devDependencies": {
-    "jest": "^30.0.0",
-    "jest-environment-jsdom": "^30.0.0",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "test": "jest --runInBand --passWithNoTests",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --runInBand --coverage --passWithNoTests"
+    "test:coverage": "jest --runInBand --coverage --passWithNoTests",
+    "lint": "echo \"No linter configured\"",
+    "build": "echo \"No build step required\""
   },
   "dependencies": {
     "nodemailer": "^8.0.7"
