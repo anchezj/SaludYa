@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/alerts.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="css/mockup.css">
 </head>
 
 <body>
@@ -20,13 +21,13 @@
 
                 <form id="authForm">
                     <div class="input-group" id="userGroup">
-                        <input type="text" id="username" placeholder="Ingresar usuario" required>
+                        <input type="text" id="username" placeholder="Ingresar usuario" >
                     </div>
                     <div class="input-group">
-                        <input type="password" id="password" placeholder="Ingresar contraseña" required>
+                        <input type="password" id="password" placeholder="Ingresar contraseña" >
                     </div>
-
-                    <p class="role-group-label">Selecciona el tipo de acceso</p>
+                    
+                        <p class="role-group-label">Selecciona el tipo de acceso</p>
                     <div class="role-group">
                         <label class="custom-radio">
                             Afiliado
@@ -69,9 +70,26 @@
 
     </div>
 
-    <script src="js/mock_backend.js"></script>
-    <script src="js/script.js"></script>
     <script src="js/alerts.js"></script>
+    <script>
+        document.getElementById('authForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const role = document.querySelector('input[name="role"]:checked')?.value;
+
+            if (role === 'afiliado') {
+                window.location.href = 'views/Patient/citas.html';
+                return;
+            }
+
+            if (role === 'especialista') {
+                window.location.href = 'views/Doctor/pacientes_programados.html';
+                return;
+            }
+
+            alert('Selecciona un tipo de acceso.');
+        });
+    </script>
 </body>
 
 </html>

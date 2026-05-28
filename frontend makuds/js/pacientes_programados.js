@@ -99,19 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const cambiarEstado = async (id, nuevoEstado) => {
         try {
-            const res = await fetch(`http://localhost:3000/api/citas/estado/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({ nuevoEstado })
-            });
-
-            if (!res.ok) {
-                throw new Error('No se pudo actualizar');
-            }
-
+            window.MockBackend.api.updateCitaEstado(id, nuevoEstado);
             showAlert('success', 'Actualizado', `Cita ${nuevoEstado}`);
             await CitasStore.refresh();
             await cargarCitas();

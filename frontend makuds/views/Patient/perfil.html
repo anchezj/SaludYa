@@ -305,11 +305,10 @@
     </div>
 
     <!-- Scripts -->
+    <script src="../../js/mock_backend.js"></script>
     <script src="../../js/alerts.js"></script>
     <script src="../../js/script.js"></script>
     <script>
-        const API = 'http://localhost:3000/api/auth';
-
         // Mostrar valor en la tarjeta de info (con fallback si está vacío)
         function setInfo(id, value) {
             const el = document.getElementById(id);
@@ -338,13 +337,7 @@
             if (!token) return;
 
             try {
-                const resp = await fetch(`${API}/profile`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-
-                if (!resp.ok) return;
-
-                const data = await resp.json();
+                const data = window.MockBackend.api.getProfile();
 
                 // --- Tarjeta de información ---
                 setInfo('ic-nombre', data.nombre);
@@ -390,18 +383,8 @@
             };
 
             try {
-                const resp = await fetch(`${API}/profile`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const data = await resp.json();
-
-                if (resp.ok) {
+                try {
+                    window.MockBackend.api.updateProfile(payload);
                     // Actualizar el nombre en el localStorage para que el sidebar lo refleje
                     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
                     usuario.nombre = payload.nombre;
@@ -412,11 +395,11 @@
                     AlertSystem.success('¡Perfil actualizado!', 'Tus datos han sido guardados correctamente.', () => {
                         cargarPerfil(); // Refrescar la tarjeta
                     });
-                } else {
-                    AlertSystem.error('Error', data.message || 'No se pudo actualizar.');
+                } catch (error) {
+                    AlertSystem.error('Error', error.message || 'No se pudo actualizar.');
                 }
             } catch (err) {
-                AlertSystem.error('Error', 'No se pudo conectar con el servidor.');
+                AlertSystem.error('Error', 'No se pudo cargar el perfil.');
             } finally {
                 btn.disabled = false;
                 btn.textContent = 'ACTUALIZAR INFORMACIÓN';

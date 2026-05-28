@@ -156,6 +156,7 @@ describe('citasController', () => {
 
   test('actualizarEstado persiste un estado válido', async () => {
     db.query.mockResolvedValueOnce([{ affectedRows: 1 }]);
+    db.query.mockResolvedValueOnce([[{ fecha_hora: '2026-05-23 08:00:00', motivo: 'General', nombre: 'Test User', email: 'test@example.com' }]]);
     const req = { params: { id_cita: 'c-1' }, body: { nuevoEstado: 'cancelada' } };
     const res = createRes();
 
@@ -165,7 +166,7 @@ describe('citasController', () => {
       'UPDATE citas SET estado = ? WHERE id_cita = ?',
       ['cancelada', 'c-1']
     );
-    expect(res.json).toHaveBeenCalledWith({ message: 'Estado actualizado' });
+    expect(res.json).toHaveBeenCalledWith({ message: 'Estado actualizado y correo enviado' });
   });
 
   test('actualizarEstado responde con error cuando la consulta falla', async () => {

@@ -90,21 +90,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (reportBtn) {
         reportBtn.addEventListener('click', async () => {
             try {
-                // 1. Traer data
                 const citas = await CitasStore.fetchAll();
 
-                // 2. Construir CSV (Cabeceras + Filas)
                 const cabeceras = ['ID', 'Paciente', 'Especialidad', 'Fecha y Hora', 'Estado'];
                 const filas = citas.map(cita => {
                     return `${cita.id_cita || ''},"${cita.paciente || ''}","${cita.especialidad || cita.motivo || ''}","${cita.fecha_hora || ''}","${cita.estado || ''}"`;
                 });
                 const contenidoCSV = [cabeceras.join(','), ...filas].join('\n');
 
-                // 3. Crear archivo Blob
                 const blob = new Blob(['\ufeff' + contenidoCSV], { type: 'text/csv;charset=utf-8;' });
                 const url = URL.createObjectURL(blob);
 
-                // 4. Descargar
                 const link = document.createElement('a');
                 link.href = url;
                 link.download = 'cronograma_citas.csv';

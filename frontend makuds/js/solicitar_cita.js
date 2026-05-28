@@ -233,41 +233,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     fecha_hora: fechaSeleccionadaFormateada
                 };
 
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    AlertSystem.error('Error', 'Debes iniciar sesión para agendar una cita.');
-                    window.location.href = '../../login.html';
-                    return;
-                }
-
                 try {
                     boton.textContent = 'Procesando...';
                     boton.disabled = true;
 
-                    const response = await fetch('http://localhost:3000/api/citas/crear', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`
-                        },
-                        body: JSON.stringify(citaData)
-                    });
+                    window.MockBackend.api.createCita(citaData);
+                    CitasStore.notify();
 
-                    const data = await response.json();
-
-                    if (response.ok) {
-                        AlertSystem.success(
-                            '¡Cita Confirmada!',
-                            `Tu cita de ${especialidad} ha sido agendada para el ${fechaSeleccionadaFormateada} con éxito.`,
-                            () => { window.location.href = 'citas.html'; }
-                        );
-                    } else {
-                        AlertSystem.error('Error', data.message);
-                        boton.textContent = 'Seleccionar';
-                        boton.disabled = false;
-                    }
+                    AlertSystem.success(
+                        '¡Cita Confirmada!',
+                        `Tu cita de ${especialidad} ha sido agendada para el ${fechaSeleccionadaFormateada} con éxito.`,
+                        () => { window.location.href = 'citas.html'; }
+                    );
                 } catch (error) {
-                    AlertSystem.error('Error', 'Hubo un problema de conexión con el servidor.');
+                    AlertSystem.error('Error', error.message);
                     boton.textContent = 'Seleccionar';
                     boton.disabled = false;
                 }
