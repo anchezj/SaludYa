@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- SEGURIDAD: CONTROL DE SESIÓN (FIXED PARA EVITAR LOOP) ---
+    // --- UI GLOBAL ---
     const currentPath = window.location.pathname;
     const isPublicPage = currentPath.includes('login.html') ||
         currentPath.includes('registro.html') ||
@@ -97,23 +97,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const usuarioData = localStorage.getItem('usuario');
     const token = localStorage.getItem('token');
 
-    if (!isPublicPage) {
-        // Si es una página privada y no hay token, redirigir
-        if (!usuarioData || !token) {
-            window.location.href = '../../login.html';
-            return;
-        }
-
-        // Mostrar nombre en el sidebar si existe el elemento
-        const nameDisplay = document.getElementById('userNameDisplay');
-        if (nameDisplay && usuarioData) {
+    // Ya no bloqueamos el acceso a vistas privadas por falta de sesión.
+    // Si hay datos locales, solo los usamos para pintar el nombre.
+    const nameDisplay = document.getElementById('userNameDisplay');
+    if (nameDisplay && usuarioData) {
+        try {
             const usuario = JSON.parse(usuarioData);
             nameDisplay.textContent = usuario.nombre || 'Usuario';
-        }
-    } else {
-        // Si estamos en login y ya hay sesión, podemos redirigir al dashboard
-        if (usuarioData && token && currentPath.includes('login.html')) {
-            window.location.href = 'views/Patient/citas.html';
+        } catch (error) {
+            nameDisplay.textContent = 'Usuario';
         }
     }
 

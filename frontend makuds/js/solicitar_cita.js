@@ -233,13 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     fecha_hora: fechaSeleccionadaFormateada
                 };
 
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    AlertSystem.error('Error', 'Debes iniciar sesión para agendar una cita.');
-                    window.location.href = '../../login.html';
-                    return;
-                }
-
                 try {
                     boton.textContent = 'Procesando...';
                     boton.disabled = true;

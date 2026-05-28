@@ -1,0 +1,280 @@
+:root {
+    --primary-normal: #2A7FFF;
+    --primary-hover: #1F6FE0;
+    --primary-light: #EAF2FF;
+
+    --success-normal: #2ECC71;
+    --success-hover: #27AE60;
+    --success-light: #EAFAF1;
+
+    --danger-normal: #E74C3C;
+    --danger-hover: #C0392B;
+    --danger-light: #FDEDEC;
+
+    --warning-normal: #F39C12;
+    --warning-hover: #D68910;
+    --warning-light: #FEF5E7;
+
+    --info-normal: #17A2B8;
+    --info-hover: #138496;
+    --info-light: #E8F8FA;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    /* Light background to make the white card pop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.main-container {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 1000px;
+    height: 80vh;
+    min-height: 600px;
+    display: flex;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* LEFT PANEL */
+.left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.logo-wrapper {
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+    box-shadow: none;
+    filter: none;
+}
+
+.welcome-title {
+    color: var(--info-normal);
+    /* Color Info Normal de la paleta */
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.login-prompt p {
+    color: var(--info-normal);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.login-link {
+    color: var(--info-normal);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 15px;
+    display: block;
+    margin-bottom: 40px;
+    transition: color 0.3s;
+}
+
+.login-link:hover {
+    color: var(--info-hover);
+    /* Color Info Hover */
+}
+
+.role-group-label {
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+    text-align: left;
+}
+
+.btn-solid {
+    background: var(--info-normal);
+    /* Color Info Normal */
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px #17A2B84D;
+    transition: all 0.3s ease;
+}
+
+.btn-solid:hover {
+    background: var(--info-hover);
+    /* Color Info Hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px #13849666;
+}
+
+.login-btn {
+    padding: 12px 40px;
+}
+
+/* RIGHT PANEL */
+.right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+.form-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 50px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--info-light);
+    /* Color Info Light */
+}
+
+.form-title {
+    color: var(--info-normal);
+    /* Color Info Normal */
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--info-normal);
+    /* Color Info Normal */
+    border-radius: 6px;
+    font-size: 13px;
+    color: #333;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input-group input::placeholder {
+    color: var(--info-normal);
+    /* Color Info Normal */
+    opacity: 0.8;
+}
+
+.input-group input:focus {
+    border-color: var(--info-hover);
+    /* Color Info Hover */
+    box-shadow: 0 0 0 3px var(--info-light);
+    /* Color Info Light para el glow */
+}
+
+/* Radio Buttons and Forgot Password */
+.role-group {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.custom-radio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--info-normal);
+    font-weight: 500;
+}
+
+.custom-radio input[type="radio"] {
+    display: none;
+}
+
+.radio-mark {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--info-normal);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.custom-radio input[type="radio"]:checked+.radio-mark {
+    background-color: var(--info-normal);
+    border-color: var(--info-normal);
+}
+
+.forgot-password {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.forgot-password a {
+    color: var(--info-normal);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.forgot-password a:hover {
+    color: var(--info-hover);
+}
+
+.submit-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.register-btn {
+    padding: 12px 50px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-panel,
+    .right-panel {
+        padding: 30px 20px;
+    }
+}
+
+/* Clase para deshabilitar elementos (enlaces, botones, etc.) */
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    filter: grayscale(1);
+    cursor: not-allowed;
+}

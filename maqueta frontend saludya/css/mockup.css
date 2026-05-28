@@ -1,0 +1,728 @@
+/* ============================================
+   MAQUETA DE DESARROLLO - VISUALIZACIÓN DE ESTRUCTURA
+   Bordes y degradados para identificar secciones
+   
+   ✨ EFECTOS ACTIVADOS:
+   - Bordes de colores distintivos
+   - Degradados suaves
+   - Efectos Glassmorphism
+   - Blur y transparencia
+   - Sombras envolventes
+   - Transiciones suaves
+   ============================================ */
+
+:root {
+    --mockup-red: #FF6B6B;
+    --mockup-blue: #4A90E2;
+    --mockup-green: #2ECC71;
+    --mockup-yellow: #F1C40F;
+    --mockup-purple: #9B59B6;
+    --mockup-orange: #E67E22;
+    --mockup-cyan: #1ABC9C;
+    --mockup-pink: #FF69B4;
+    
+    /* Efectos de Transparencia */
+    --blur-amount: 12px;
+    --glass-opacity: 0.25;
+}
+
+/* ============================================
+   EFECTOS GLOBALES DE GLASSMORPHISM
+   ============================================ */
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* CONTENEDORES PRINCIPALES */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%) !important;
+    background-attachment: fixed !important;
+}
+
+.main-container,
+.dashboard-layout,
+.container,
+.wrapper {
+    border: 2px solid var(--mockup-red) !important;
+    box-shadow: 
+        inset 0 0 10px rgba(255, 107, 107, 0.2) !important,
+        0 8px 32px 0 rgba(74, 144, 226, 0.15) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.58) 0%, 
+        rgba(240, 248, 255, 0.36) 50%,
+        rgba(255, 250, 240, 0.42) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.35)) saturate(1.15) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.35)) saturate(1.15) !important;
+    position: relative;
+}
+
+/* PANELES */
+.left-panel,
+.right-panel,
+.sidebar,
+.main-content {
+    border: 2px solid var(--mockup-green) !important;
+    box-shadow: 
+        inset 0 0 8px rgba(46, 204, 113, 0.15) !important,
+        0 8px 32px 0 rgba(46, 204, 113, 0.1) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.62) 0%, 
+        rgba(240, 248, 255, 0.45) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.2)) saturate(1.12) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.2)) saturate(1.12) !important;
+    position: relative;
+}
+
+.left-panel::before,
+.right-panel::before {
+    content: 'PANEL';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    color: var(--mockup-green);
+    font-weight: bold;
+    opacity: 0.6;
+    z-index: 10;
+}
+
+.sidebar::before {
+    content: 'SIDEBAR';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    color: var(--mockup-green);
+    font-weight: bold;
+    opacity: 0.6;
+    z-index: 10;
+}
+
+/* TARJETAS Y CARDS */
+.card,
+.form-card,
+.widget,
+.item {
+    border: 2px solid var(--mockup-blue) !important;
+    box-shadow: 
+        0 0 15px rgba(74, 144, 226, 0.3) !important,
+        0 8px 32px 0 rgba(74, 144, 226, 0.2) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.62) 0%, 
+        rgba(230, 245, 255, 0.48) 50%,
+        rgba(255, 248, 240, 0.46) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.35)) saturate(1.15) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.35)) saturate(1.15) !important;
+    position: relative;
+}
+
+.card::before,
+.form-card::before,
+.widget::before {
+    content: 'CARD';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    color: var(--mockup-blue);
+    font-weight: bold;
+    opacity: 0.5;
+    z-index: 10;
+}
+
+/* SECCIONES */
+section,
+.section,
+.content-section,
+.page-section {
+    border: 2px dashed var(--mockup-orange) !important;
+    box-shadow: 
+        inset 0 0 10px rgba(230, 126, 34, 0.1) !important,
+        0 8px 32px 0 rgba(230, 126, 34, 0.08) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.58) 0%, 
+        rgba(255, 248, 240, 0.42) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.1)) saturate(1.08) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.1)) saturate(1.08) !important;
+    padding: 15px !important;
+    margin-bottom: 15px !important;
+    position: relative;
+}
+
+section::before {
+    content: 'SECTION';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    color: var(--mockup-orange);
+    font-weight: bold;
+    opacity: 0.5;
+    z-index: 10;
+}
+
+/* HEADERS Y FOOTERS */
+header,
+.header,
+.navbar,
+.top-bar {
+    border: 2px solid var(--mockup-purple) !important;
+    box-shadow: 
+        0 2px 10px rgba(155, 89, 182, 0.2) !important,
+        0 8px 24px rgba(155, 89, 182, 0.1) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.85) 0%, 
+        rgba(245, 240, 250, 0.8) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.7)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.7)) !important;
+}
+
+footer,
+.footer,
+.bottom-bar {
+    border: 2px solid var(--mockup-purple) !important;
+    box-shadow: 
+        0 -2px 10px rgba(155, 89, 182, 0.2) !important,
+        0 -8px 24px rgba(155, 89, 182, 0.1) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.85) 0%, 
+        rgba(245, 240, 250, 0.8) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.7)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.7)) !important;
+}
+
+/* FILAS Y COLUMNAS */
+.row,
+.grid-row,
+.flex-row {
+    border: 1px solid var(--mockup-cyan) !important;
+    box-shadow: 
+        inset 0 0 5px rgba(26, 188, 156, 0.1) !important,
+        0 4px 12px rgba(26, 188, 156, 0.08) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.6) 0%, 
+        rgba(240, 255, 250, 0.5) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.3)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.3)) !important;
+}
+
+.col,
+.column,
+.grid-col,
+[class*="col-"] {
+    border: 1px dashed var(--mockup-yellow) !important;
+    box-shadow: 
+        inset 0 0 5px rgba(241, 196, 15, 0.1) !important,
+        0 4px 12px rgba(241, 196, 15, 0.05) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.7) 0%, 
+        rgba(255, 255, 240, 0.65) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.25)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.25)) !important;
+}
+
+/* FORMULARIOS */
+form,
+.form {
+    border: 2px solid var(--mockup-pink) !important;
+    box-shadow: 
+        inset 0 0 10px rgba(255, 105, 180, 0.1) !important,
+        0 8px 32px 0 rgba(255, 105, 180, 0.12) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.62) 0%, 
+        rgba(255, 240, 245, 0.45) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.2)) saturate(1.12) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.2)) saturate(1.12) !important;
+    padding: 20px !important;
+    position: relative;
+}
+
+form::before {
+    content: 'FORM';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    color: var(--mockup-pink);
+    font-weight: bold;
+    opacity: 0.5;
+    z-index: 10;
+}
+
+/* INPUTS Y CAMPOS */
+.input-group,
+.form-group,
+.field-group {
+    border: 1px solid rgba(74, 144, 226, 0.5) !important;
+    box-shadow: 
+        inset 0 0 5px rgba(74, 144, 226, 0.05) !important,
+        0 4px 16px rgba(74, 144, 226, 0.08) !important;
+    padding: 8px !important;
+    margin-bottom: 8px !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.68) 0%, 
+        rgba(240, 248, 255, 0.5) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.9)) saturate(1.08) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.9)) saturate(1.08) !important;
+}
+
+/* Bloques que en la maqueta funcionan como "pestañas" o tarjetas principales */
+.header-card,
+.schedule-shell,
+.profile-card,
+.form-section,
+.available-appointments,
+.datepicker-container {
+    border: 2px solid var(--mockup-blue) !important;
+    box-shadow:
+        0 8px 32px 0 rgba(74, 144, 226, 0.12) !important;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.68) 0%,
+        rgba(240, 248, 255, 0.5) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.85)) saturate(1.05) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.85)) saturate(1.05) !important;
+    position: relative;
+}
+
+.header-card::before,
+.schedule-shell::before,
+.profile-card::before,
+.form-section::before,
+.available-appointments::before,
+.datepicker-container::before {
+    position: absolute;
+    top: -11px;
+    left: 14px;
+    padding: 0 8px;
+    background: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--mockup-blue);
+    z-index: 10;
+}
+
+.header-card::before {
+    content: 'HEADER';
+}
+
+.schedule-shell::before {
+    content: 'PANEL';
+}
+
+.profile-card::before {
+    content: 'CARD';
+}
+
+.form-section::before {
+    content: 'SECTION';
+}
+
+.available-appointments::before {
+    content: 'TABLE';
+}
+
+.datepicker-container::before {
+    content: 'PICKER';
+}
+
+input,
+textarea,
+select {
+    border: 1px solid rgba(74, 144, 226, 0.3) !important;
+}
+
+/* BOTONES */
+button:not(.btn-solid):not(.login-btn):not(.register-btn),
+.btn:not(.btn-solid):not(.login-btn):not(.register-btn),
+[class*="btn-"]:not(.btn-solid):not(.login-btn):not(.register-btn),
+a.button:not(.btn-solid):not(.login-btn):not(.register-btn) {
+    border: 2px solid var(--mockup-red) !important;
+    box-shadow: 
+        0 2px 8px rgba(255, 107, 107, 0.3) !important,
+        0 8px 24px rgba(255, 107, 107, 0.15) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.45) 0%, 
+        rgba(255, 240, 240, 0.28) 100%) !important;
+    color: inherit !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.05)) saturate(1.1) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.05)) saturate(1.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+button:not(.btn-solid):not(.login-btn):not(.register-btn):hover,
+.btn:not(.btn-solid):not(.login-btn):not(.register-btn):hover,
+[class*="btn-"]:not(.btn-solid):not(.login-btn):not(.register-btn):hover {
+    box-shadow: 
+        0 4px 12px rgba(255, 107, 107, 0.5) !important,
+        0 12px 32px rgba(255, 107, 107, 0.25) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.25)) saturate(1.12) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.25)) saturate(1.12) !important;
+}
+
+/* NAVEGACIÓN */
+nav,
+.nav,
+.navbar,
+.navigation {
+    border: 2px solid var(--mockup-green) !important;
+}
+
+.nav-item,
+.menu-item,
+.nav-link {
+    border-bottom: 1px solid rgba(46, 204, 113, 0.3) !important;
+}
+
+.nav-item:last-child {
+    border-bottom: none !important;
+}
+
+/* TABLAS */
+table,
+.table {
+    border: 2px solid var(--mockup-blue) !important;
+    border-collapse: collapse !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.85) 0%, 
+        rgba(230, 245, 255, 0.75) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.5)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.5)) !important;
+}
+
+table thead,
+.table thead {
+    background: linear-gradient(135deg, 
+        rgba(74, 144, 226, 0.15) 0%, 
+        rgba(74, 144, 226, 0.05) 100%) !important;
+    border: 2px solid var(--mockup-blue) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.4)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.4)) !important;
+}
+
+table th,
+table td,
+.table th,
+.table td {
+    border: 1px solid rgba(74, 144, 226, 0.3) !important;
+}
+
+/* LISTAS */
+ul,
+ol,
+.list {
+    border: 1px solid rgba(155, 89, 182, 0.3) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.8) 0%, 
+        rgba(245, 240, 250, 0.75) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.4)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.4)) !important;
+    padding: 15px !important;
+}
+
+li,
+.list-item {
+    border-bottom: 1px dashed rgba(155, 89, 182, 0.2) !important;
+    padding: 8px 0 !important;
+}
+
+li:last-child,
+.list-item:last-child {
+    border-bottom: none !important;
+}
+
+/* MODALES Y DIÁLOGOS */
+.modal,
+.dialog,
+.popup {
+    border: 3px solid var(--mockup-red) !important;
+    box-shadow: 
+        0 0 20px rgba(255, 107, 107, 0.5) !important,
+        0 8px 32px 0 rgba(255, 107, 107, 0.3) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(240, 248, 255, 0.85) 100%) !important;
+    backdrop-filter: blur(var(--blur-amount)) !important;
+    -webkit-backdrop-filter: blur(var(--blur-amount)) !important;
+}
+
+.modal-content,
+.dialog-content {
+    border: 2px solid var(--mockup-orange) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.85) 0%, 
+        rgba(255, 248, 240, 0.8) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.8)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.8)) !important;
+}
+
+/* ALERTAS Y NOTIFICACIONES */
+.alert,
+.notification,
+.message {
+    border: 2px solid var(--mockup-yellow) !important;
+    box-shadow: 
+        inset 0 0 10px rgba(241, 196, 15, 0.2) !important,
+        0 8px 32px rgba(241, 196, 15, 0.1) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.85) 0%, 
+        rgba(255, 250, 205, 0.7) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.7)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.7)) !important;
+}
+
+/* DEGRADADO DE FONDO PARA EFECTOS */
+.gradient-blur {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(74, 144, 226, 0.1)) !important;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* EFECTO DE DEGRADADO EN BORDES */
+[class*="gradient-border"] {
+    position: relative;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--mockup-red), var(--mockup-blue), var(--mockup-green)) border-box !important;
+}
+
+/* ELEMENTOS ESPECIALES DEL DASHBOARD */
+.dashboard-body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 50%, #dfe8f0 100%) !important;
+    background-attachment: fixed !important;
+}
+
+.sidebar-logo {
+    border: 2px solid var(--mockup-green) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.8) 0%, 
+        rgba(240, 248, 255, 0.75) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.6)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.6)) !important;
+    padding: 15px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 8px 32px rgba(46, 204, 113, 0.1) !important;
+}
+
+.sidebar-nav {
+    border: 1px solid rgba(46, 204, 113, 0.3) !important;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.75) 0%, 
+        rgba(240, 248, 255, 0.7) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.4)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.4)) !important;
+}
+
+.logo-wrapper {
+    border: 2px solid var(--mockup-yellow) !important;
+    padding: 20px !important;
+    display: inline-block !important;
+}
+
+.logo-wrapper::before {
+    content: 'LOGO';
+    display: block;
+    position: absolute;
+    font-size: 10px;
+    color: var(--mockup-yellow);
+    font-weight: bold;
+    opacity: 0.6;
+}
+
+/* ICONOS Y ELEMENTOS PEQUEÑOS */
+.icon,
+.btn-icon,
+[class*="icon-"],
+i[class*="ti-"] {
+    border-radius: 4px !important;
+}
+
+/* ESPACIADORES Y DIVIDERS */
+hr,
+.divider,
+.separator {
+    border: 2px dashed var(--mockup-cyan) !important;
+    opacity: 0.5 !important;
+}
+
+/* OVERLAY Y FONDOS */
+.overlay,
+.backdrop {
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(46, 204, 113, 0.1)) !important;
+}
+
+/* TEXTOS Y TÍTULOS */
+h1, h2, h3, h4, h5, h6 {
+    position: relative;
+    padding-left: 15px !important;
+}
+
+h1,
+h2 {
+    display: inline-block;
+    border-left: 4px solid var(--mockup-blue) !important;
+    padding-left: 12px !important;
+    margin-top: 0 !important;
+}
+
+h1::before {
+    content: 'H1: ';
+    color: var(--mockup-red);
+    font-size: 0.7em;
+    opacity: 0.4;
+    font-weight: bold;
+}
+
+h2::before {
+    content: 'H2: ';
+    color: var(--mockup-blue);
+    font-size: 0.7em;
+    opacity: 0.4;
+    font-weight: bold;
+}
+
+h3::before {
+    content: 'H3: ';
+    color: var(--mockup-green);
+    font-size: 0.7em;
+    opacity: 0.4;
+    font-weight: bold;
+}
+
+/* EFECTOS DE HOVER PARA MEJOR VISUALIZACIÓN */
+.main-container:hover,
+.sidebar:hover,
+.form-card:hover {
+    box-shadow: 
+        inset 0 0 15px rgba(74, 144, 226, 0.3) !important,
+        0 12px 48px rgba(74, 144, 226, 0.2) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.1)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.1)) !important;
+}
+
+/* ZOOM SUAVE EN ELEMENTOS */
+.card,
+.form-card {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1), 
+                box-shadow 0.3s ease,
+                backdrop-filter 0.3s ease !important;
+}
+
+.card:hover,
+.form-card:hover {
+    transform: scale(1.02) translateY(-4px) !important;
+    box-shadow: 
+        0 0 20px rgba(74, 144, 226, 0.4) !important,
+        0 16px 40px rgba(74, 144, 226, 0.25) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.2)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.2)) !important;
+}
+
+/* IMÁGENES Y MEDIA */
+img,
+picture,
+video {
+    border: 2px solid var(--mockup-cyan) !important;
+    box-shadow: 0 8px 24px rgba(26, 188, 156, 0.15) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+img:hover,
+picture:hover,
+video:hover {
+    transform: scale(1.02) !important;
+    box-shadow: 0 12px 32px rgba(26, 188, 156, 0.25) !important;
+}
+
+/* RESPONSIVO PARA MÓVILES */
+@media (max-width: 768px) {
+    .left-panel,
+    .right-panel {
+        border-width: 2px !important;
+    }
+
+    .col,
+    .column {
+        border-width: 1px !important;
+    }
+
+    section {
+        border-width: 2px !important;
+    }
+}
+
+/* ETIQUETAS DE DEPURACIÓN */
+.debug-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 2px;
+    z-index: 1000;
+}
+
+/* EFECTO FINAL: BLUR DE DEGRADADO PREMIUM */
+.blur-gradient {
+    background: linear-gradient(135deg, 
+        rgba(255, 107, 107, 0.15), 
+        rgba(74, 144, 226, 0.15), 
+        rgba(46, 204, 113, 0.15),
+        rgba(155, 89, 182, 0.15)) !important;
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+    border: 2px solid rgba(74, 144, 226, 0.3) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 32px rgba(74, 144, 226, 0.2) !important;
+}
+
+/* CLASES ADICIONALES PARA EFECTOS PERSONALIZADOS */
+
+/* Efecto extra fuerte de transparencia */
+.ultra-blur {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.7) 0%, 
+        rgba(230, 245, 255, 0.6) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.5)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.5)) !important;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Efecto de cristal suave */
+.glass-effect {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.82) 0%, 
+        rgba(245, 250, 255, 0.75) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 1.2)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 1.2)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 
+        inset 0 0 30px rgba(255, 255, 255, 0.5),
+        0 8px 32px 0 rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Efecto de degradado sin bordes visibles */
+.soft-blur {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.9) 0%, 
+        rgba(240, 248, 255, 0.85) 100%) !important;
+    backdrop-filter: blur(calc(var(--blur-amount) * 0.7)) !important;
+    -webkit-backdrop-filter: blur(calc(var(--blur-amount) * 0.7)) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Efecto premium con glow */
+.glow-effect {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.85) 0%, 
+        rgba(240, 248, 255, 0.78) 100%) !important;
+    backdrop-filter: blur(var(--blur-amount)) !important;
+    -webkit-backdrop-filter: blur(var(--blur-amount)) !important;
+    box-shadow: 
+        0 0 30px rgba(74, 144, 226, 0.2) !important,
+        0 8px 32px rgba(0, 0, 0, 0.1) !important,
+        inset 0 0 30px rgba(255, 255, 255, 0.3) !important;
+}
