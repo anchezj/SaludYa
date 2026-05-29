@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const citasTbody = document.getElementById('citas-tbody');
     if (!citasTbody) return;
 
+    // Verificar si el usuario tiene token
+    const token = CitasStore.getToken();
+    if (!token) {
+        window.location.href = '../../login.html';
+        return;
+    }
+
     const renderCitas = async () => {
         try {
             const citas = await CitasStore.fetchAll();
