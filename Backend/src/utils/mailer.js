@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-require('dotenv').config();
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 
 // Creamos el "transporter" (el cartero)
 const transporter = nodemailer.createTransport({
