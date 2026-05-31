@@ -6,6 +6,10 @@ jest.mock('uuid', () => ({
   v4: jest.fn()
 }));
 
+jest.mock('../utils/mailer', () => ({
+  sendMail: jest.fn()
+}));
+
 const db = require('../config/db');
 const { v4: uuidv4 } = require('uuid');
 const citasController = require('../controllers/citasController');

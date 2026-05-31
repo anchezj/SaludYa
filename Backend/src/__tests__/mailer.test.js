@@ -2,7 +2,7 @@ jest.mock('nodemailer', () => ({
   createTransport: jest.fn(() => ({
     verify: jest.fn().mockResolvedValue()
   }))
-}));
+}), { virtual: true });
 
 describe('mailer', () => {
   beforeEach(() => {

@@ -15,13 +15,10 @@ const { Pool } = require('pg');
 describe('db config', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    process.env.DB_HOST = 'localhost';
-    process.env.DB_USER = 'root';
-    process.env.DB_PASSWORD = 'pass';
-    process.env.DB_NAME = 'saludya';
+    process.env.DATABASE_URL = 'postgresql://user:pass@db.supabase.co:5432/postgres';
   });
 
-  test('crea el pool con la configuración esperada', async () => {
+  test('crea el pool con la configuracion de Supabase esperada', async () => {
     const connect = jest.fn().mockResolvedValue({ release: jest.fn() });
     Pool.mockImplementation(() => ({
       connect
@@ -31,11 +28,7 @@ describe('db config', () => {
     require('../config/db');
 
     expect(Pool).toHaveBeenCalledWith({
-      host: 'localhost',
-      port: 5432,
-      user: 'root',
-      password: 'pass',
-      database: 'saludya',
+      connectionString: 'postgresql://user:pass@db.supabase.co:5432/postgres',
       ssl: {
         rejectUnauthorized: false
       }
