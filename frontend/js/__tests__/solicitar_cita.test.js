@@ -71,7 +71,7 @@ describe('solicitar_cita.js', () => {
     await Promise.resolve();
 
     expect(fetch).toHaveBeenCalledWith(
-      'http://localhost:3000/api/citas/crear',
+      '/api/citas/crear',
       expect.objectContaining({
         method: 'POST',
         headers: expect.objectContaining({

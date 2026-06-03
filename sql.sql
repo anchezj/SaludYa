@@ -45,7 +45,11 @@ CREATE TABLE IF NOT EXISTS usuarios (
     rol VARCHAR(50) DEFAULT 'paciente',
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     reset_token VARCHAR(255) DEFAULT NULL,
-    reset_expires TIMESTAMP NULL DEFAULT NULL
+    reset_expires TIMESTAMP NULL DEFAULT NULL,
+    numero_contacto VARCHAR(30),
+    edad INTEGER,
+    fecha_nacimiento DATE,
+    direccion TEXT
 );
 
 CREATE TABLE IF NOT EXISTS citas (
@@ -56,3 +60,10 @@ CREATE TABLE IF NOT EXISTS citas (
     estado VARCHAR(50) DEFAULT 'pendiente',
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS numero_contacto VARCHAR(30);
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS edad INTEGER;
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS fecha_nacimiento DATE;
+ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS direccion TEXT;
+
+

@@ -104,7 +104,8 @@ exports.forgotPassword = async (req, res) => {
         // Guardar token y expiración en la DB
         await db.query('UPDATE usuarios SET reset_token = $1, reset_expires = $2 WHERE email = $3', [token, expires, email]);
 
-        const resetLink = `http://localhost:3000/cambio_contrasena.html?token=${token}`;
+        const appUrl = process.env.APP_URL || `${req.protocol}://${req.get('host')}`;
+        const resetLink = `${appUrl}/cambio_contrasena.html?token=${token}`;
 
         // Enviar el correo
         await transporter.sendMail({

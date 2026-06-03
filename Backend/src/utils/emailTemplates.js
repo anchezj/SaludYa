@@ -36,7 +36,7 @@ const getWelcomeTemplate = (nombre) => {
     const content = `
 <h2>¡Hola ${nombre}!</h2>
 <p>Tu cuenta ha sido creada con éxito. Estamos felices de tenerte con nosotros para cuidar de tu salud.</p>
-<center><a href="http://localhost:3000/login.html" class="button">Iniciar Sesión</a></center>
+<center><a href="${process.env.APP_URL || ''}/login.html" class="button">Iniciar Sesión</a></center>
     `;
     return getBaseTemplate(content, "¡Bienvenido a SaludYa!");
 };

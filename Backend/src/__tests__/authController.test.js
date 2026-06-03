@@ -131,10 +131,27 @@ describe('authController', () => {
     db.query.mockResolvedValueOnce({ rows: [{ nombre: 'Ana' }] }).mockResolvedValueOnce({ rows: [] });
     uuidv4.mockReturnValue('reset-token');
     transporter.sendMail.mockResolvedValue();
-    const req = { body: { email: 'ana@test.com' } };
+
+    const req = {
+      body: { email: 'ana@test.com' },
+      protocol: 'https',
+      get: jest.fn(() => 'saludya.vercel.app')
+    };
     const res = createRes();
     await authController.forgotPassword(req, res);
-    expect(res.json).toHaveBeenCalled();
+
+    expect(db.query).toHaveBeenCalledWith(
+      'UPDATE usuarios SET reset_token = $1, reset_expires = $2 WHERE email = $3',
+      ['reset-token', expect.any(Date), 'ana@test.com']
+    );
+    expect(transporter.sendMail).toHaveBeenCalled();
+    expect(templates.getPasswordResetTemplate).toHaveBeenCalledWith(
+      'Ana',
+      'https://saludya.vercel.app/cambio_contrasena.html?token=reset-token'
+    );
+    expect(res.json).toHaveBeenCalledWith({
+      message: 'Se ha enviado un enlace de recuperación a tu correo.'
+    });
   });
 
   test('forgotPassword rechaza correos no registrados', async () => {

@@ -67,7 +67,7 @@ describe('CitasStore', () => {
     const citas = await window.CitasStore.refresh();
 
     expect(fetch).toHaveBeenCalledWith(
-      'http://localhost:3000/api/citas/todas',
+      '/api/citas/todas',
       expect.objectContaining({
         method: 'GET',
         headers: expect.objectContaining({

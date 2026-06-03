@@ -11,7 +11,6 @@ describe('db config', () => {
     jest.resetModules();
     jest.clearAllMocks();
     process.env.DATABASE_URL = 'postgresql://user:pass@db.supabase.co:5432/postgres';
-    delete process.env.NODE_ENV;
   });
 
   test('crea el pool con la configuracion de Supabase esperada', () => {

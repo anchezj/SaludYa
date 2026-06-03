@@ -87,7 +87,7 @@ describe('pacientes_programados.js', () => {
     await flushPromises();
 
     expect(fetch).toHaveBeenCalledWith(
-      'http://localhost:3000/api/citas/estado/1',
+      '/api/citas/estado/1',
       expect.objectContaining({
         method: 'PUT',
         headers: expect.objectContaining({
