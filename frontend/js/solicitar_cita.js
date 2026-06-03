@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     boton.textContent = 'Procesando...';
                     boton.disabled = true;
 
-                    const response = await fetch('http://localhost:3000/api/citas/crear', {
+                    const response = await fetch('/api/citas/crear', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

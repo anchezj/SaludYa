@@ -43,7 +43,7 @@ describe('script.js', () => {
     await flushPromises();
 
     expect(fetch).toHaveBeenCalledWith(
-      'http://localhost:3000/api/auth/login',
+      '/api/auth/login',
       expect.objectContaining({
         method: 'POST'
       })
@@ -167,7 +167,7 @@ describe('script.js', () => {
     await flushPromises();
 
     expect(fetch).toHaveBeenCalledWith(
-      'http://localhost:3000/api/auth/forgot-password',
+      '/api/auth/forgot-password',
       expect.objectContaining({
         method: 'POST',
         body: JSON.stringify({ email: 'paciente@test.com' })
@@ -357,7 +357,7 @@ describe('script.js', () => {
     await flushPromises();
 
     expect(fetch).toHaveBeenCalledWith(
-      'http://localhost:3000/api/auth/reset-password',
+      '/api/auth/reset-password',
       expect.objectContaining({
         method: 'POST',
         body: JSON.stringify({ token: 'abc-123', newPassword: 'nueva123' })

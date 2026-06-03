@@ -186,7 +186,11 @@ describe('authController', () => {
     uuidv4.mockReturnValue('reset-token');
     transporter.sendMail.mockResolvedValue();
 
-    const req = { body: { email: 'ana@test.com' } };
+    const req = {
+      body: { email: 'ana@test.com' },
+      protocol: 'https',
+      get: jest.fn(() => 'saludya.vercel.app')
+    };
     const res = createRes();
 
     await authController.forgotPassword(req, res);
@@ -198,7 +202,7 @@ describe('authController', () => {
     expect(transporter.sendMail).toHaveBeenCalled();
     expect(templates.getPasswordResetTemplate).toHaveBeenCalledWith(
       'Ana',
-      'http://localhost:3000/cambio_contrasena.html?token=reset-token'
+      'https://saludya.vercel.app/cambio_contrasena.html?token=reset-token'
     );
     expect(res.json).toHaveBeenCalledWith({
       message: 'Se ha enviado un enlace de recuperación a tu correo.'

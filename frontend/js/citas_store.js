@@ -1,5 +1,5 @@
 window.CitasStore = (() => {
-    const API_BASE = 'http://localhost:3000/api/citas';
+    const API_BASE = '/api/citas';
     const CACHE_KEY = 'saludya:citas-cache';
     const SIGNAL_KEY = 'saludya:citas-updated';
     const CHANNEL_NAME = 'saludya-citas-sync';

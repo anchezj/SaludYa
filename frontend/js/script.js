@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const API_AUTH = '/api/auth';
     const authForm = document.getElementById('authForm');
     if (authForm) {
         authForm.addEventListener('submit', async (e) => {
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const expectedRole = selectedRole === 'afiliado' ? 'paciente' : 'especialista';
 
                 try {
-                    const response = await fetch('http://localhost:3000/api/auth/login', {
+                    const response = await fetch(`${API_AUTH}/login`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email, password })
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 try {
-                    const response = await fetch('http://localhost:3000/api/auth/register', {
+                    const response = await fetch(`${API_AUTH}/register`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
@@ -100,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Enviando...';
 
             try {
-                const response = await fetch('http://localhost:3000/api/auth/forgot-password', {
+                const response = await fetch(`${API_AUTH}/forgot-password`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email })
@@ -182,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // 3. Enviar la petición al nuevo Endpoint
-                const response = await fetch('http://localhost:3000/api/auth/reset-password', {
+                const response = await fetch(`${API_AUTH}/reset-password`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ token, newPassword })
