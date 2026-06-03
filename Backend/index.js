@@ -5,17 +5,27 @@ require('dotenv').config();
 
 const app = express();
 
-const allowedOrigins = [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:5173',
-    process.env.FRONTEND_URL,
-    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null
-].filter(Boolean);
-
 app.use(cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+        const localOrigins = [
+            'http://localhost:3000',
+            'http://localhost:5173',
+            'http://127.0.0.1:3000',
+            'http://127.0.0.1:5173'
+        ];
+
+        const allowedOrigins = [
+            ...localOrigins,
+            process.env.FRONTEND_URL,
+            process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null
+        ].filter(Boolean);
+
+        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+            return callback(null, true);
+        }
+
+        return callback(new Error(`Origen no permitido por CORS: ${origin}`));
+    },
     credentials: true
 }));
 app.use(express.json());
