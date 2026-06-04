@@ -6,6 +6,14 @@ require('dotenv').config();
 const app = express();
 const frontendDir = path.join(__dirname, 'frontend');
 
+const indexPage = `<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0; url=/login.html">
+  </head>
+  <body></body>
+</html>`;
+
 const loginPage = `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -81,7 +89,8 @@ app.use(express.json());
 app.use('/api/auth', require('./Backend/src/routes/authRoutes'));
 app.use('/api/citas', require('./Backend/src/routes/citasRoutes'));
 
-app.get('/', (req, res) => res.type('html').send(loginPage));
+app.get('/', (req, res) => res.type('html').send(indexPage));
+app.get('/index.html', (req, res) => res.type('html').send(indexPage));
 app.get('/login', (req, res) => res.type('html').send(loginPage));
 app.get('/login.html', (req, res) => res.type('html').send(loginPage));
 

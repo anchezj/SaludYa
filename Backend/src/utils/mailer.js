@@ -1,18 +1,16 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-// Creamos el "transporter" (el cartero)
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
-    secure: true, // Usamos SSL/TLS
+    secure: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     }
 });
 
-// Verificamos si la conexión es correcta (solo en ambiente de producción)
 if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL && process.env.EMAIL_USER && process.env.EMAIL_PASS) {
     transporter.verify().then(() => {
         console.log('✅ Servidor de correos listo');
