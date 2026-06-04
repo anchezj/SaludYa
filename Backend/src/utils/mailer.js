@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Verificamos si la conexión es correcta (solo en ambiente de producción)
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL && process.env.EMAIL_USER && process.env.EMAIL_PASS) {
     transporter.verify().then(() => {
         console.log('✅ Servidor de correos listo');
     }).catch((error) => {
