@@ -1,6 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
+  "buildCommand": "echo 'No build required'",
+  "outputDirectory": ".",
   "functions": {
     "api/index.js": {
       "includeFiles": "frontend/**",
