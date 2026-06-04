@@ -1,13 +1,24 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
 const app = express();
 const frontendDir = path.join(__dirname, 'frontend');
+const pageCache = new Map();
 
-const sendFrontend = (relativePath) => (req, res) => {
-  res.sendFile(path.join(frontendDir, relativePath));
+const renderFrontend = (relativePath) => (req, res, next) => {
+  try {
+    if (!pageCache.has(relativePath)) {
+      const filePath = path.join(frontendDir, relativePath);
+      pageCache.set(relativePath, fs.readFileSync(filePath, 'utf8'));
+    }
+
+    res.type('html').send(pageCache.get(relativePath));
+  } catch (error) {
+    next(error);
+  }
 };
 
 app.use(cors({
@@ -39,22 +50,27 @@ app.use(express.json());
 app.use('/api/auth', require('./Backend/src/routes/authRoutes'));
 app.use('/api/citas', require('./Backend/src/routes/citasRoutes'));
 
-app.get('/', sendFrontend('login.html'));
-app.get('/login', sendFrontend('login.html'));
-app.get('/login.html', sendFrontend('login.html'));
-app.get('/registro', sendFrontend('registro.html'));
-app.get('/registro.html', sendFrontend('registro.html'));
-app.get('/olvido_contrasena', sendFrontend('olvido_contrasena.html'));
-app.get('/olvido_contrasena.html', sendFrontend('olvido_contrasena.html'));
-app.get('/cambio_contrasena', sendFrontend('cambio_contrasena.html'));
-app.get('/cambio_contrasena.html', sendFrontend('cambio_contrasena.html'));
-app.get('/index.html', sendFrontend('index.html'));
+app.get('/', renderFrontend('login.html'));
+app.get('/login', renderFrontend('login.html'));
+app.get('/login.html', renderFrontend('login.html'));
+app.get('/registro', renderFrontend('registro.html'));
+app.get('/registro.html', renderFrontend('registro.html'));
+app.get('/olvido_contrasena', renderFrontend('olvido_contrasena.html'));
+app.get('/olvido_contrasena.html', renderFrontend('olvido_contrasena.html'));
+app.get('/cambio_contrasena', renderFrontend('cambio_contrasena.html'));
+app.get('/cambio_contrasena.html', renderFrontend('cambio_contrasena.html'));
+app.get('/index.html', renderFrontend('index.html'));
 
-app.get('/views/Patient/citas.html', sendFrontend('views/Patient/citas.html'));
-app.get('/views/Patient/perfil.html', sendFrontend('views/Patient/perfil.html'));
-app.get('/views/Patient/solicitar_cita.html', sendFrontend('views/Patient/solicitar_cita.html'));
-app.get('/views/Doctor/cronograma_citas.html', sendFrontend('views/Doctor/cronograma_citas.html'));
-app.get('/views/Doctor/pacientes_programados.html', sendFrontend('views/Doctor/pacientes_programados.html'));
-app.get('/views/Doctor/perfil.html', sendFrontend('views/Doctor/perfil.html'));
+app.get('/views/Patient/citas.html', renderFrontend('views/Patient/citas.html'));
+app.get('/views/Patient/perfil.html', renderFrontend('views/Patient/perfil.html'));
+app.get('/views/Patient/solicitar_cita.html', renderFrontend('views/Patient/solicitar_cita.html'));
+app.get('/views/Doctor/cronograma_citas.html', renderFrontend('views/Doctor/cronograma_citas.html'));
+app.get('/views/Doctor/pacientes_programados.html', renderFrontend('views/Doctor/pacientes_programados.html'));
+app.get('/views/Doctor/perfil.html', renderFrontend('views/Doctor/perfil.html'));
+
+app.use((err, req, res, next) => {
+  console.error('Unhandled app error:', err);
+  res.status(500).send('Internal Server Error');
+});
 
 module.exports = app;
