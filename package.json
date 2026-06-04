@@ -9,8 +9,8 @@
     "test:coverage:backend": "jest --config jest.backend.config.cjs --runInBand --coverage --coverageDirectory=coverage/backend --passWithNoTests",
     "test:coverage:frontend": "jest --config jest.frontend.config.cjs --runInBand --coverage --coverageDirectory=coverage/frontend --passWithNoTests",
     "test:coverage:full": "jest --runInBand --coverage --coverageDirectory=coverage/full --passWithNoTests",
-    "start": "node Backend/index.js",
-    "dev": "nodemon Backend/index.js",
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
     "lint": "echo \"No linter configured\"",
     "build": "echo \"No build step required\""
   },
