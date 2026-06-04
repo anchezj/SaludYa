@@ -1,3 +1,4 @@
+<<<<<<< C:/Users/Usuario/Documents/GIt/SaludYa/vercel.json
 {
   "version": 2,
   "functions": {
@@ -12,3 +13,26 @@
     }
   ]
 }
+=======
+{
+  "version": 2,
+  "buildCommand": "echo 'No build required'",
+  "outputDirectory": ".",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "frontend/**",
+      "runtime": "nodejs22.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.js"
+    }
+  ]
+}
+>>>>>>> C:/Users/Usuario/.windsurf/worktrees/SaludYa/SaludYa-027c67a0/vercel.json

@@ -32,7 +32,7 @@ exports.register = async (req, res) => {
                 html: getWelcomeTemplate(nombre),
                 attachments: [{
                     filename: 'logo.png',
-                    path: path.join(__dirname, '../../../frontend/assest/logo.png'),
+                    path: path.join(__dirname, '../../../../frontend/assest/logo.png'),
                     cid: 'logo_saludya'
                 }]
             });
@@ -115,7 +115,7 @@ exports.forgotPassword = async (req, res) => {
             html: getPasswordResetTemplate(user.nombre, resetLink),
             attachments: [{
                 filename: 'logo.png',
-                path: path.join(__dirname, '../../../frontend/assest/logo.png'),
+                path: path.join(__dirname, '../../../../frontend/assest/logo.png'),
                 cid: 'logo_saludya'
             }]
         });

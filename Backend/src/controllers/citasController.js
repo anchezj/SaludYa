@@ -53,7 +53,7 @@ exports.crearCita = async (req, res) => {
                     html: getAppointmentTemplate(paciente.nombre, fecha_hora, motivo),
                     attachments: [{
                         filename: 'logo.png',
-                        path: path.join(__dirname, '../../../frontend/assest/logo.png'),
+                        path: path.join(__dirname, '../../../../frontend/assest/logo.png'),
                         cid: 'logo_saludya'
                     }]
                 });
@@ -149,7 +149,7 @@ exports.actualizarEstado = async (req, res) => {
                     html: getStatusUpdateTemplate(cita.nombre, cita.fecha_hora, cita.motivo, nuevoEstado),
                     attachments: [{
                         filename: 'logo.png',
-                        path: path.join(__dirname, '../../../frontend/assest/logo.png'),
+                        path: path.join(__dirname, '../../../../frontend/assest/logo.png'),
                         cid: 'logo_saludya'
                     }]
                 });
