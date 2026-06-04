@@ -11,8 +11,7 @@
     "test:coverage:full": "jest --runInBand --coverage --coverageDirectory=coverage/full --passWithNoTests",
     "start": "node api/index.js",
     "dev": "nodemon api/index.js",
-    "lint": "echo \"No linter configured\"",
-    "postinstall": "node scripts/copy-frontend-to-public.js"
+    "lint": "echo \"No linter configured\""
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
