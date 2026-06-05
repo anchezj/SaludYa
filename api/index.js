@@ -35,6 +35,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(express.static(frontendDir));
 
 app.use('/api/auth', require('../Backend/src/routes/authRoutes'));
 app.use('/api/citas', require('../Backend/src/routes/citasRoutes'));
