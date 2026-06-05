@@ -1,10 +1,18 @@
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { v4: uuidv4 } = require('uuid');
 const transporter = require('../utils/mailer');
 const { getWelcomeTemplate, getPasswordResetTemplate } = require('../utils/emailTemplates');
 const path = require('path');
+
+// Función auxiliar para obtener uuidv4 de forma dinámica
+let uuidModule;
+async function getUuidv4() {
+    if (!uuidModule) {
+        uuidModule = await import('uuid');
+    }
+    return uuidModule.v4();
+}
 
 exports.register = async (req, res) => {
     try {
@@ -18,7 +26,7 @@ exports.register = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const id_usuario = uuidv4();
+        const id_usuario = await getUuidv4();
 
         const query = 'INSERT INTO usuarios (id_usuario, nombre, email, password, rol) VALUES ($1, $2, $3, $4, $5)';
         await db.query(query, [id_usuario, nombre, email, hashedPassword, rol || 'paciente']);
@@ -98,7 +106,7 @@ exports.forgotPassword = async (req, res) => {
         }
 
         const user = users[0];
-        const token = uuidv4();
+        const token = await getUuidv4();
         const expires = new Date(Date.now() + 3600000); // El token expira en 1 hora
 
         // Guardar token y expiración en la DB
