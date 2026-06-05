@@ -1,8 +1,14 @@
 {
   "version": 2,
+  "buildCommand": "npm install",
   "functions": {
-    "index.js": {
-      "includeFiles": "frontend/**"
+    "api/index.js": {
+      "runtime": "nodejs20.x",
+      "includeFiles": "**"
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/(.*)", "destination": "/api/index.js" }
+  ]
 }

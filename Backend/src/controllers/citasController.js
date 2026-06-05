@@ -1,9 +1,17 @@
 const db = require('../config/db');
-const { v4: uuidv4 } = require('uuid');
 const transporter = require('../utils/mailer');
 const { getAppointmentTemplate } = require('../utils/emailTemplates');
 const path = require('path');
 const { getStatusUpdateTemplate } = require('../utils/emailTemplates');
+
+// Función auxiliar para obtener uuidv4 de forma dinámica
+let uuidModule;
+async function getUuidv4() {
+    if (!uuidModule) {
+        uuidModule = await import('uuid');
+    }
+    return uuidModule.v4();
+}
 
 exports.crearCita = async (req, res) => {
     try {
@@ -15,7 +23,7 @@ exports.crearCita = async (req, res) => {
             return res.status(400).json({ message: 'La fecha y la especialidad son requeridas.' });
         }
 
-        const id_cita = uuidv4();
+        const id_cita = await getUuidv4();
 
         // Bloqueamos la misma fecha/hora para la misma especialidad
         // Así una cita de Psicología a las 8:00 ocupa ese turno,
