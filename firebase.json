@@ -1,0 +1,6 @@
+{
+  "hosting": {
+    "public": "SaludYa front/frontend makuds",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+  }
+}
