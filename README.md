@@ -167,12 +167,9 @@ El proyecto incluye suites de pruebas para backend y frontend configuradas con J
 
 ---
 
-## 🔮 Próximas Actualizaciones
-- Descargar un reporte de las citas mensual
-- Envío de notificaciones y recordatorios de las citas al correo (opcional WhatsApp)
-- Migración completa a la nueva estructura en `api/`
-- Mejoras en la suite de pruebas
-
+6. **Proximas Actualizaciones**:
+   - Descargar un reporte de la citas mensual (paciente)
+   - Envio de notificacione y recordatorio de la citas al correo (opcional WhatsApp)
 ---
 
 Desarrollado con ❤️ para mejorar la gestión de salud.
