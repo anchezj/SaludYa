@@ -33,10 +33,11 @@ const getBaseTemplate = (content, title) => {
     `;
 };
 const getWelcomeTemplate = (nombre) => {
+    const appUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://salud-ya-wheat.vercel.app';
     const content = `
 <h2>¡Hola ${nombre}!</h2>
 <p>Tu cuenta ha sido creada con éxito. Estamos felices de tenerte con nosotros para cuidar de tu salud.</p>
-<center><a href="${process.env.APP_URL || ''}/login.html" class="button">Iniciar Sesión</a></center>
+<center><a href="${appUrl}/login.html" class="button">Iniciar Sesión</a></center>
     `;
     return getBaseTemplate(content, "¡Bienvenido a SaludYa!");
 };

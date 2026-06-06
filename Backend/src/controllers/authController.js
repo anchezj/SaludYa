@@ -60,16 +60,24 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log('Intento de login - Email:', email);
 
         const { rows: users } = await db.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+        console.log('Usuarios encontrados:', users.length);
+        
         if (users.length === 0) {
+            console.log('Usuario no encontrado en la base de datos');
             return res.status(401).json({ message: 'Credenciales inválidas.' });
         }
 
         const user = users[0];
+        console.log('Usuario encontrado:', user.nombre, 'Rol:', user.rol);
 
         const isMatch = await bcrypt.compare(password, user.password);
+        console.log('Password match:', isMatch);
+        
         if (!isMatch) {
+            console.log('Contraseña incorrecta');
             return res.status(401).json({ message: 'Credenciales inválidas.' });
         }
 
@@ -112,7 +120,7 @@ exports.forgotPassword = async (req, res) => {
         // Guardar token y expiración en la DB
         await db.query('UPDATE usuarios SET reset_token = $1, reset_expires = $2 WHERE email = $3', [token, expires, email]);
 
-        const appUrl = process.env.APP_URL || `${req.protocol}://${req.get('host')}`;
+        const appUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://salud-ya-wheat.vercel.app';
         const resetLink = `${appUrl}/cambio_contrasena.html?token=${token}`;
 
         // Enviar el correo

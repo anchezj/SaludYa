@@ -1,5 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
     const API_AUTH = '/api/auth';
+    
+    // Helper para localStorage con manejo de errores
+    const safeStorage = {
+        setItem: (key, value) => {
+            try {
+                localStorage.setItem(key, value);
+                return true;
+            } catch (e) {
+                console.warn('localStorage bloqueado por el navegador:', e);
+                return false;
+            }
+        },
+        getItem: (key) => {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                console.warn('localStorage bloqueado por el navegador:', e);
+                return null;
+            }
+        },
+        clear: () => {
+            try {
+                localStorage.clear();
+                return true;
+            } catch (e) {
+                console.warn('localStorage bloqueado por el navegador:', e);
+                return false;
+            }
+        }
+    };
+    
     const authForm = document.getElementById('authForm');
     if (authForm) {
         authForm.addEventListener('submit', async (e) => {
@@ -33,9 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         AlertSystem.success('Inicio de sesión exitoso', 'Bienvenido a SaludYa', () => {
                             // Guardar el Token en el navegador para usarlo después
-                            localStorage.setItem('token', data.token);
+                            safeStorage.setItem('token', data.token);
                             // Guardar los datos del usuario
-                            localStorage.setItem('usuario', JSON.stringify(data.usuario));
+                            safeStorage.setItem('usuario', JSON.stringify(data.usuario));
                             const redirectUrl = userRole === 'especialista'
                                 ? 'views/Doctor/cronograma_citas.html'
                                 : 'views/Patient/citas.html';
@@ -110,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     AlertSystem.success('Envio de recuperación de contraseña exitoso', 'Revisa tu correo de recuperación de contraseña para acceder al sistema', () => {
-                        localStorage.clear();
+                        safeStorage.clear();
                             window.location.assign('login.html');
                     });
                 } else {
@@ -133,8 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPath.includes('cambio_contrasena.html') ||
         currentPath === '/';
 
-    const usuarioData = localStorage.getItem('usuario');
-    const token = localStorage.getItem('token');
+    const usuarioData = safeStorage.getItem('usuario');
+    const token = safeStorage.getItem('token');
 
     const nameDisplay = document.getElementById('userNameDisplay');
     if (nameDisplay && usuarioData) {
@@ -149,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.querySelector('a[href="../../login.html"]');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
-            localStorage.clear(); // Borra token y datos de usuario
+            safeStorage.clear(); // Borra token y datos de usuario
         });
     }
 
